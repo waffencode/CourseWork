@@ -7,7 +7,7 @@ public class InventoryObjectsList
 {
     private UUID id;
     private String name;
-    // private Status status;
+    private Boolean isArchived;
     private UUID createdById;
     private Date creationDate;
     private UUID archivedBy;

@@ -10,7 +10,7 @@ public class InventoryObject
     private Boolean isInPlace;
     private Category category;
     private UUID listId;
-    // private Status status;
+    private Boolean isDecommissioned;
     private UUID addedById;
     private Date additionDate;
     private UUID decommissionedById;
