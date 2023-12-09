@@ -1,5 +1,6 @@
 package com.course.server;
 
+import com.course.server.database.Database;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,9 +9,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/object")
 public class ObjectServlet extends HttpServlet
 {
+    private final Database database;
+
+    public ObjectServlet(Database database)
+    {
+        this.database = database;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {

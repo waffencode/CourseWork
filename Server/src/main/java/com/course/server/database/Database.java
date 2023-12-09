@@ -1,6 +1,5 @@
 package com.course.server.database;
 
-
 import com.course.server.domain.InventoryObject;
 import com.course.server.domain.InventoryObjectsList;
 import com.course.server.domain.User;
@@ -83,6 +82,6 @@ public class Database
 
     public void deleteList(UUID id)
     {
-        
+
     }
 }
