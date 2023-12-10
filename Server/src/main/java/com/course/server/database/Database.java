@@ -5,6 +5,7 @@ import com.course.server.domain.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Database
@@ -35,7 +36,7 @@ public class Database
         User user = new User();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?;"))
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE id = ?;"))
         {
             statement.setString(1, id.toString());
             ResultSet resultSet = statement.executeQuery();
@@ -45,15 +46,17 @@ public class Database
                 user.setId(UUID.fromString(resultSet.getString("id")));
                 user.setLogin(resultSet.getString("login"));
                 user.setPasswordHash(resultSet.getString("password_hash"));
-                user.setRole(Role.valueOf(resultSet.getString("role")));
+                user.setRole(Role.values()[Integer.parseInt(resultSet.getString("role"))]);
                 user.setRegistrationDate(Timestamp.valueOf(resultSet.getString("registration_date")));
+
+                return user;
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return user;
+        return null;
     }
 
     public List<User> getAllUsers(UUID id)
@@ -95,10 +98,10 @@ public class Database
             {
                 object.setInventoryNumber(resultSet.getString("inventory_number"));
                 object.setName(resultSet.getString("name"));
-                object.setInPlace(Boolean.valueOf(resultSet.getString("is_in_place")));
+                object.setInPlace(Objects.equals(resultSet.getString("is_in_place"), "1"));
                 object.setCategory(Category.values()[Integer.parseInt(resultSet.getString("category"))]);
                 object.setListId(UUID.fromString(resultSet.getString("list_id")));
-                object.setDecommissioned(Boolean.valueOf(resultSet.getString("is_decommissioned")));
+                object.setDecommissioned(Objects.equals(resultSet.getString("is_decommissioned"), "1"));
                 object.setAddedById(UUID.fromString(resultSet.getString("added_by_id")));
                 object.setAdditionDate(Timestamp.valueOf(resultSet.getString("addition_date")));
 
@@ -140,7 +143,36 @@ public class Database
 
     public InventoryObjectsList getList(UUID id)
     {
-        return new InventoryObjectsList();
+        InventoryObjectsList list = new InventoryObjectsList();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM lists WHERE id = ?;"))
+        {
+            statement.setString(1, id.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next())
+            {
+                list.setId(UUID.fromString(resultSet.getString("id")));
+                list.setName(resultSet.getString("name"));
+                list.setArchived(Objects.equals(resultSet.getString("is_archived"), "1"));
+                list.setCreatedById(UUID.fromString(resultSet.getString("created_by_id")));
+                list.setCreationDate(Timestamp.valueOf(resultSet.getString("creation_date")));
+
+                if (resultSet.getString("archived_by_id") != null)
+                {
+                    list.setArchivedBy(UUID.fromString(resultSet.getString("archived_by_id")));
+                    list.setArchivationDate(Timestamp.valueOf(resultSet.getString("archivation_date")));
+                }
+
+                return list;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void updateList(InventoryObjectsList list)

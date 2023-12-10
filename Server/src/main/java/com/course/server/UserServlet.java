@@ -1,6 +1,8 @@
 package com.course.server;
 
 import com.course.server.database.Database;
+import com.course.server.domain.InventoryObjectsList;
+import com.course.server.domain.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.UUID;
 
 public class UserServlet extends HttpServlet
 {
@@ -21,7 +25,14 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        UUID userId = UUID.fromString(req.getParameter("id"));
+        User user = database.getUser(userId);
+        String responseContent = user.toString();
 
+        resp.setContentType("text/json");
+        PrintWriter printWriter = resp.getWriter();
+        printWriter.write(responseContent);
+        printWriter.close();
     }
 
     @Override
