@@ -14,7 +14,6 @@ public class Database
     private static final String USER = "root";
     private static final String PASS = "+WHLm0WsP^j6hr7mfD58";
 
-
     public Database()
     {
         try
@@ -59,9 +58,33 @@ public class Database
         return null;
     }
 
-    public List<User> getAllUsers(UUID id)
+    public List<User> getAllUsers()
     {
-        return new ArrayList<User>();
+        List<User> users = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM user;"))
+        {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                User user = new User();
+
+                user.setId(UUID.fromString(resultSet.getString("id")));
+                user.setLogin(resultSet.getString("login"));
+                user.setPasswordHash(resultSet.getString("password_hash"));
+                user.setRole(Role.values()[Integer.parseInt(resultSet.getString("role"))]);
+                user.setRegistrationDate(Timestamp.valueOf(resultSet.getString("registration_date")));
+
+                users.add(user);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     public boolean isValidLoginData(String login, String passwordHash)
@@ -123,6 +146,40 @@ public class Database
 
     public List<InventoryObject> getAllObjectsFromList(UUID listId)
     {
+        List<InventoryObject> objects = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE list_id = ?;"))
+        {
+            statement.setString(1, listId.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                InventoryObject object = new InventoryObject();
+
+                object.setInventoryNumber(resultSet.getString("inventory_number"));
+                object.setName(resultSet.getString("name"));
+                object.setInPlace(Objects.equals(resultSet.getString("is_in_place"), "1"));
+                object.setCategory(Category.values()[Integer.parseInt(resultSet.getString("category"))]);
+                object.setListId(UUID.fromString(resultSet.getString("list_id")));
+                object.setDecommissioned(Objects.equals(resultSet.getString("is_decommissioned"), "1"));
+                object.setAddedById(UUID.fromString(resultSet.getString("added_by_id")));
+                object.setAdditionDate(Timestamp.valueOf(resultSet.getString("addition_date")));
+
+                if (resultSet.getString("decommissioned_by_id") != null)
+                {
+                    object.setDecommissionedById(UUID.fromString(resultSet.getString("decommissioned_by_id")));
+                    object.setDecommissionDate(Timestamp.valueOf(resultSet.getString("decommission_date")));
+                }
+
+                objects.add(object);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
         return new ArrayList<InventoryObject>();
     }
 
@@ -173,6 +230,41 @@ public class Database
         }
 
         return null;
+    }
+
+    public List<InventoryObjectsList> getAllLists()
+    {
+        List<InventoryObjectsList> lists = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM lists;"))
+        {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                InventoryObjectsList list = new InventoryObjectsList();
+
+                list.setId(UUID.fromString(resultSet.getString("id")));
+                list.setName(resultSet.getString("name"));
+                list.setArchived(Objects.equals(resultSet.getString("is_archived"), "1"));
+                list.setCreatedById(UUID.fromString(resultSet.getString("created_by_id")));
+                list.setCreationDate(Timestamp.valueOf(resultSet.getString("creation_date")));
+
+                if (resultSet.getString("archived_by_id") != null)
+                {
+                    list.setArchivedBy(UUID.fromString(resultSet.getString("archived_by_id")));
+                    list.setArchivationDate(Timestamp.valueOf(resultSet.getString("archivation_date")));
+                }
+
+                lists.add(list);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return lists;
     }
 
     public void updateList(InventoryObjectsList list)
