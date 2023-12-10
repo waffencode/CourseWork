@@ -1,6 +1,6 @@
 package com.course.server.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class User
@@ -9,7 +9,7 @@ public class User
     private String login;
     private String passwordHash;
     private Role role;
-    private Date registrationDate;
+    private Timestamp registrationDate;
 
     public UUID getId()
     {
@@ -51,13 +51,25 @@ public class User
         this.role = role;
     }
 
-    public Date getRegistrationDate()
+    public Timestamp getRegistrationDate()
     {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate)
+    public void setRegistrationDate(Timestamp registrationDate)
     {
         this.registrationDate = registrationDate;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", role=" + role +
+                ", registrationDate=" + registrationDate +
+                '}';
     }
 }
