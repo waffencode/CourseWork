@@ -16,14 +16,14 @@ public class LoginController extends SceneController
     {
         super(application);
 
-//        try
-//        {
-//            root = FXMLLoader.load(Objects.requireNonNull(application.getClass().getClassLoader().getResource("LoginView.fxml")));
-//            scene = new Scene(root);
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        }
+        try
+        {
+            root = FXMLLoader.load(application.getClass().getClassLoader().getResource("LoginView.fxml"));
+            scene = new Scene(root);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
