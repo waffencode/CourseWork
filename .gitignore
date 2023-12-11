@@ -28,3 +28,4 @@ buildNumber.properties
 .classpath
 Client/.idea/**
 Client/.idea/*
+Client/.idea/workspace.xml
