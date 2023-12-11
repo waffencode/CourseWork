@@ -3,6 +3,7 @@ package com.course.server;
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObject;
 import com.course.server.domain.InventoryObjectsList;
+import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,13 +26,13 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID inventoryNumber = UUID.fromString(req.getParameter("id"));
-        InventoryObjectsList object = database.getList(inventoryNumber);
-        String responseContent = object.toString();
+        UUID listId = UUID.fromString(req.getParameter("id"));
+        InventoryObjectsList list = database.getList(listId);
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write(responseContent);
+        JsonStream stream = new JsonStream(printWriter);
+        stream.write(list);
         printWriter.close();
     }
 

@@ -1,14 +1,9 @@
 package com.course.server.service;
 
-import com.course.server.domain.InventoryObject;
-import com.course.server.domain.InventoryObjectsList;
-import com.course.server.domain.User;
+import com.course.server.domain.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 
 public class JsonStream
@@ -25,7 +20,7 @@ public class JsonStream
     {
         try
         {
-            objectMapper.writerWithType(new TypeReference<User>()
+            objectMapper.writerFor(new TypeReference<User>()
             {
             }).writeValue(writer, user);
         } catch (IOException e)
@@ -38,7 +33,7 @@ public class JsonStream
     {
         try
         {
-            objectMapper.writerWithType(new TypeReference<InventoryObjectsList>()
+            objectMapper.writerFor(new TypeReference<InventoryObjectsList>()
             {
             }).writeValue(writer, list);
         } catch (IOException e)
@@ -51,7 +46,7 @@ public class JsonStream
     {
         try
         {
-            objectMapper.writerWithType(new TypeReference<InventoryObject>()
+            objectMapper.writerFor(new TypeReference<InventoryObject>()
             {
             }).writeValue(writer, object);
         } catch (IOException e)
@@ -64,7 +59,7 @@ public class JsonStream
     {
         try
         {
-            objectMapper.writerWithType(new TypeReference<List<InventoryObject>>()
+            objectMapper.writerFor(new TypeReference<List<InventoryObject>>()
             {
             }).writeValue(writer, objects);
         } catch (IOException e)
