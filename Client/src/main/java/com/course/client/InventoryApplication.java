@@ -1,5 +1,6 @@
 package com.course.client;
 
+import com.course.client.controllers.LoginController;
 import com.course.client.ui.NotificationDialog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +16,8 @@ public class InventoryApplication extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(InventoryApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+        stage.setScene(new LoginController(this).getScene());
         stage.show();
-
-        NotificationDialog.showInformationDialog("Test");
-        NotificationDialog.showWarningDialog("Test");
-        NotificationDialog.showErrorDialog("Test");
     }
 
     public static void main(String[] args)
