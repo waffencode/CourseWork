@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class InventoryObjectsList
 {
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String name;
     private Boolean isArchived;
     private UUID createdById;

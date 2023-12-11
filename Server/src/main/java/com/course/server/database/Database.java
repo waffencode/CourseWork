@@ -27,7 +27,20 @@ public class Database
 
     public void createUser(User user)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?);"))
+        {
+            statement.setString(1, user.getId().toString());
+            statement.setString(2, user.getLogin());
+            statement.setString(3, user.getPasswordHash());
+            statement.setInt(4, user.getRole().ordinal());
+            statement.setTimestamp(5, user.getRegistrationDate());
 
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public User getUser(UUID id)

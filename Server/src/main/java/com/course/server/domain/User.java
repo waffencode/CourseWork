@@ -5,11 +5,11 @@ import java.util.UUID;
 
 public class User
 {
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String login;
     private String passwordHash;
     private Role role;
-    private Timestamp registrationDate;
+    private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
 
     public UUID getId()
     {

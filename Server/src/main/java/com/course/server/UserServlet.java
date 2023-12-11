@@ -1,11 +1,9 @@
 package com.course.server;
 
 import com.course.server.database.Database;
-import com.course.server.domain.InventoryObjectsList;
 import com.course.server.domain.User;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,7 +37,11 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-
+//        User user = new User();
+//        user.setLogin("Example");
+//        user.setPasswordHash("213123");
+//        user.setRole(Role.USER);
+//        database.createUser(user);
     }
 
     @Override
