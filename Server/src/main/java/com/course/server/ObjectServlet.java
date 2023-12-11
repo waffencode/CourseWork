@@ -2,7 +2,6 @@ package com.course.server;
 
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObject;
-import com.course.server.domain.InventoryObjectsList;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -47,7 +46,15 @@ public class ObjectServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        String inventoryNumber = req.getParameter("id");
+        BufferedReader reader = req.getReader();
+        JsonStream stream = new JsonStream(reader);
+        InventoryObject object = stream.readObject();
 
+        if (inventoryNumber.equals(object.getInventoryNumber()))
+        {
+            database.updateObject(object);
+        }
     }
 
     @Override

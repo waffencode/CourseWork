@@ -49,7 +49,15 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        UUID listId = UUID.fromString(req.getParameter("id"));
+        BufferedReader reader = req.getReader();
+        JsonStream stream = new JsonStream(reader);
+        InventoryObjectsList list = stream.readList();
 
+        if (listId.equals(list.getId()))
+        {
+            database.updateList(list);
+        }
     }
 
     @Override

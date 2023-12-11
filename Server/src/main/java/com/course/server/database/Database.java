@@ -107,7 +107,20 @@ public class Database
 
     public void updateUser(User user)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("UPDATE user SET login = ?, password_hash = ?, role = ?, registration_date = ? WHERE id = ?;"))
+        {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPasswordHash());
+            statement.setInt(3, user.getRole().ordinal());
+            statement.setTimestamp(4, user.getRegistrationDate());
+            statement.setString(5, user.getId().toString());
 
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void deleteUser(UUID id)
@@ -234,7 +247,46 @@ public class Database
 
     public void updateObject(InventoryObject object)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("UPDATE inventory_objects\n" +
+                     "SET\n" +
+                     "    name = ?,\n" +
+                     "    is_in_place = ?,\n" +
+                     "    category = ?,\n" +
+                     "    list_id = ?,\n" +
+                     "    is_decommissioned = ?,\n" +
+                     "    added_by_id = ?,\n" +
+                     "    addition_date = ?,\n" +
+                     "    decommissioned_by_id = ?,\n" +
+                     "    decommission_date = ?\n" +
+                     "WHERE inventory_number = ?;\n"))
+        {
+            statement.setString(1, object.getName());
+            statement.setBoolean(2, object.getInPlace());
+            statement.setInt(3, object.getCategory().ordinal());
+            statement.setString(4, object.getListId().toString());
+            statement.setBoolean(5, object.getDecommissioned());
+            statement.setString(6, object.getAddedById().toString());
+            statement.setTimestamp(7, object.getAdditionDate());
 
+            if (object.getDecommissionedById() != null)
+            {
+                statement.setString(8, object.getDecommissionedById().toString());
+                statement.setTimestamp(9, object.getDecommissionDate());
+            }
+            else
+            {
+                statement.setNull(8, JDBCType.VARCHAR.ordinal());
+                statement.setNull(9, JDBCType.TIMESTAMP.ordinal());
+            }
+
+            statement.setString(10, object.getInventoryNumber());
+
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void deleteObject(String inventoryNumber)
@@ -351,7 +403,40 @@ public class Database
 
     public void updateList(InventoryObjectsList list)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("UPDATE lists\n" +
+                     "SET\n" +
+                     "    name = ?,\n" +
+                     "    is_archived = ?,\n" +
+                     "    created_by_id = ?,\n" +
+                     "    creation_date = ?,\n" +
+                     "    archived_by_id = ?,\n" +
+                     "    archivation_date = ?\n" +
+                     "WHERE\n" +
+                     "    id = ?;\n"))
+        {
+            statement.setString(1, list.getName());
+            statement.setBoolean(2, list.getArchived());
+            statement.setString(3, list.getCreatedById().toString());
+            statement.setTimestamp(4, list.getCreationDate());
 
+            if (list.getArchivedBy() != null)
+            {
+                statement.setString(5, list.getArchivedBy().toString());
+                statement.setTimestamp(6, list.getArchivationDate());
+            }
+            else
+            {
+                statement.setNull(5, JDBCType.VARCHAR.ordinal());
+                statement.setNull(6, JDBCType.TIMESTAMP.ordinal());
+            }
+            statement.setString(7, list.getId().toString());
+
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void deleteList(UUID id)

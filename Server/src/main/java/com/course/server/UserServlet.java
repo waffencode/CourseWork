@@ -47,7 +47,15 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        UUID userId = UUID.fromString(req.getParameter("id"));
+        BufferedReader reader = req.getReader();
+        JsonStream stream = new JsonStream(reader);
+        User user = stream.readUser();
 
+        if (userId.equals(user.getId()))
+        {
+            database.updateUser(user);
+        }
     }
 
     @Override
