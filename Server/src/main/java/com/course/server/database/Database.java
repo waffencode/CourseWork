@@ -180,7 +180,7 @@ public class Database
             e.printStackTrace();
         }
 
-        return new ArrayList<InventoryObject>();
+        return objects;
     }
 
     public void updateObject(InventoryObject object)

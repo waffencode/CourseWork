@@ -2,6 +2,7 @@ package com.course.server;
 
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObject;
+import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,11 +25,11 @@ public class ObjectServlet extends HttpServlet
     {
         String inventoryNumber = req.getParameter("id");
         InventoryObject object = database.getObject(inventoryNumber);
-        String responseContent = object.toString();
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write(responseContent);
+        JsonStream stream = new JsonStream(printWriter);
+        stream.write(object);
         printWriter.close();
     }
 

@@ -3,6 +3,7 @@ package com.course.server;
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObjectsList;
 import com.course.server.domain.User;
+import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,11 +28,11 @@ public class UserServlet extends HttpServlet
     {
         UUID userId = UUID.fromString(req.getParameter("id"));
         User user = database.getUser(userId);
-        String responseContent = user.toString();
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write(responseContent);
+        JsonStream stream = new JsonStream(printWriter);
+        stream.write(user);
         printWriter.close();
     }
 
