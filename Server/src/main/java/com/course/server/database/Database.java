@@ -112,7 +112,16 @@ public class Database
 
     public void deleteUser(UUID id)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;"))
+        {
+            statement.setString(1, id.toString());
 
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void createObject(InventoryObject object)
@@ -228,9 +237,18 @@ public class Database
 
     }
 
-    public void deleteObject(UUID id)
+    public void deleteObject(String inventoryNumber)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM inventory_objects WHERE inventory_number = ?;"))
+        {
+            statement.setString(1, inventoryNumber);
 
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void createList(InventoryObjectsList list)
@@ -338,6 +356,15 @@ public class Database
 
     public void deleteList(UUID id)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM lists WHERE id = ?;"))
+        {
+            statement.setString(1, id.toString());
 
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

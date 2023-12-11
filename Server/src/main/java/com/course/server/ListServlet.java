@@ -55,7 +55,8 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-
+        UUID listId = UUID.fromString(req.getParameter("id"));
+        database.deleteList(listId);
     }
 }
 
