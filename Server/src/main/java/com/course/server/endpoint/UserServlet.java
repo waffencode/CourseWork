@@ -2,6 +2,7 @@ package com.course.server.endpoint;
 
 import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
+import com.course.server.domain.Role;
 import com.course.server.domain.User;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
@@ -27,13 +28,18 @@ public class UserServlet extends HttpServlet
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID userId = UUID.fromString(req.getParameter("id"));
-        User user = applicationServiceProvider.database.getUser(userId);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
 
-        resp.setContentType("text/json");
-        PrintWriter printWriter = resp.getWriter();
-        JsonStream stream = new JsonStream(printWriter);
-        stream.write(user);
-        printWriter.close();
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById))
+        {
+            User user = applicationServiceProvider.database.getUser(userId);
+
+            resp.setContentType("text/json");
+            PrintWriter printWriter = resp.getWriter();
+            JsonStream stream = new JsonStream(printWriter);
+            stream.write(user);
+            printWriter.close();
+        }
     }
 
     @Override
@@ -48,14 +54,19 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID userId = UUID.fromString(req.getParameter("id"));
-        BufferedReader reader = req.getReader();
-        JsonStream stream = new JsonStream(reader);
-        User user = stream.readUser();
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
 
-        if (userId.equals(user.getId()))
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById))
         {
-            applicationServiceProvider.database.updateUser(user);
+            UUID userId = UUID.fromString(req.getParameter("id"));
+            BufferedReader reader = req.getReader();
+            JsonStream stream = new JsonStream(reader);
+            User user = stream.readUser();
+
+            if (userId.equals(user.getId()))
+            {
+                applicationServiceProvider.database.updateUser(user);
+            }
         }
     }
 
@@ -63,6 +74,12 @@ public class UserServlet extends HttpServlet
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID userId = UUID.fromString(req.getParameter("id"));
-        applicationServiceProvider.database.deleteUser(userId);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
+
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
+                applicationServiceProvider.database.getUser(userId).getRole().compareTo(Role.ADMINISTRATOR) >= 0)
+        {
+            applicationServiceProvider.database.deleteUser(userId);
+        }
     }
 }

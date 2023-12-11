@@ -3,6 +3,7 @@ package com.course.server.endpoint;
 import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObjectsList;
+import com.course.server.domain.Role;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -26,44 +27,67 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
-        InventoryObjectsList list = applicationServiceProvider.database.getList(listId);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
 
-        resp.setContentType("text/json");
-        PrintWriter printWriter = resp.getWriter();
-        JsonStream stream = new JsonStream(printWriter);
-        stream.write(list);
-        printWriter.close();
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById))
+        {
+            UUID listId = UUID.fromString(req.getParameter("id"));
+            InventoryObjectsList list = applicationServiceProvider.database.getList(listId);
+
+            resp.setContentType("text/json");
+            PrintWriter printWriter = resp.getWriter();
+            JsonStream stream = new JsonStream(printWriter);
+            stream.write(list);
+            printWriter.close();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        BufferedReader reader = req.getReader();
-        JsonStream stream = new JsonStream(reader);
-        InventoryObjectsList list = stream.readList();
-        applicationServiceProvider.database.createList(list);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
+
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
+                applicationServiceProvider.database.getUser(issuedById).getRole().compareTo(Role.INVENTORY_OFFICER) >= 0)
+        {
+            BufferedReader reader = req.getReader();
+            JsonStream stream = new JsonStream(reader);
+            InventoryObjectsList list = stream.readList();
+            applicationServiceProvider.database.createList(list);
+        }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
-        BufferedReader reader = req.getReader();
-        JsonStream stream = new JsonStream(reader);
-        InventoryObjectsList list = stream.readList();
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
 
-        if (listId.equals(list.getId()))
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
+                applicationServiceProvider.database.getUser(issuedById).getRole().compareTo(Role.INVENTORY_OFFICER) >= 0)
         {
-            applicationServiceProvider.database.updateList(list);
+            UUID listId = UUID.fromString(req.getParameter("id"));
+            BufferedReader reader = req.getReader();
+            JsonStream stream = new JsonStream(reader);
+            InventoryObjectsList list = stream.readList();
+
+            if (listId.equals(list.getId()))
+            {
+                applicationServiceProvider.database.updateList(list);
+            }
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
-        applicationServiceProvider.database.deleteList(listId);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
+
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
+                applicationServiceProvider.database.getUser(issuedById).getRole().compareTo(Role.ADMINISTRATOR) >= 0)
+        {
+            UUID listId = UUID.fromString(req.getParameter("id"));
+            applicationServiceProvider.database.deleteList(listId);
+        }
     }
 }
 

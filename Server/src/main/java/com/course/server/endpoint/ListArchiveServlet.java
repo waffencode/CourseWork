@@ -27,7 +27,7 @@ public class ListArchiveServlet extends HttpServlet
         UUID userId = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(userId) &&
-        applicationServiceProvider.database.getUser(userId).getRole().compareTo(Role.INVENTORY_OFFICER) >= 0)
+            applicationServiceProvider.database.getUser(userId).getRole().compareTo(Role.INVENTORY_OFFICER) >= 0)
         {
             if (action == 0)
             {

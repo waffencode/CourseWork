@@ -26,13 +26,18 @@ public class ObjectViewListServlet  extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("list_id"));
-        List<InventoryObject> objects = applicationServiceProvider.database.getAllObjectsFromList(listId);
+        UUID issuedById = UUID.fromString(req.getParameter("by"));
 
-        resp.setContentType("text/json");
-        PrintWriter printWriter = resp.getWriter();
-        JsonStream stream = new JsonStream(printWriter);
-        stream.write(objects);
-        printWriter.close();
+        if (applicationServiceProvider.authenticator.isValidUser(issuedById))
+        {
+            UUID listId = UUID.fromString(req.getParameter("list_id"));
+            List<InventoryObject> objects = applicationServiceProvider.database.getAllObjectsFromList(listId);
+
+            resp.setContentType("text/json");
+            PrintWriter printWriter = resp.getWriter();
+            JsonStream stream = new JsonStream(printWriter);
+            stream.write(objects);
+            printWriter.close();
+        }
     }
 }
