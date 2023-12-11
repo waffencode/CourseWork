@@ -1,7 +1,8 @@
-package com.course.server;
+package com.course.server.endpoint;
 
+import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
-import com.course.server.domain.InventoryObjectsList;
+import com.course.server.domain.InventoryObject;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,27 +12,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
 
-public class ListServlet extends HttpServlet
+public class ObjectServlet extends HttpServlet
 {
-    private final Database database;
+    private final ApplicationServiceProvider applicationServiceProvider;
 
-    public ListServlet(Database database)
+    public ObjectServlet(ApplicationServiceProvider applicationServiceProvider)
     {
-        this.database = database;
+        this.applicationServiceProvider = applicationServiceProvider;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
-        InventoryObjectsList list = database.getList(listId);
+        String inventoryNumber = req.getParameter("id");
+        InventoryObject object = applicationServiceProvider.database.getObject(inventoryNumber);
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();
         JsonStream stream = new JsonStream(printWriter);
-        stream.write(list);
+        stream.write(object);
         printWriter.close();
     }
 
@@ -40,29 +40,28 @@ public class ListServlet extends HttpServlet
     {
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
-        InventoryObjectsList list = stream.readList();
-        database.createList(list);
+        InventoryObject object = stream.readObject();
+        applicationServiceProvider.database.createObject(object);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
+        String inventoryNumber = req.getParameter("id");
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
-        InventoryObjectsList list = stream.readList();
+        InventoryObject object = stream.readObject();
 
-        if (listId.equals(list.getId()))
+        if (inventoryNumber.equals(object.getInventoryNumber()))
         {
-            database.updateList(list);
+            applicationServiceProvider.database.updateObject(object);
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID listId = UUID.fromString(req.getParameter("id"));
-        database.deleteList(listId);
+        String inventoryNumber = req.getParameter("id");
+        applicationServiceProvider.database.deleteObject(inventoryNumber);
     }
 }
-

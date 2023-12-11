@@ -1,5 +1,6 @@
-package com.course.server;
+package com.course.server.endpoint;
 
+import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
 import com.course.server.domain.User;
 import com.course.server.service.JsonStream;
@@ -15,18 +16,18 @@ import java.util.UUID;
 
 public class UserServlet extends HttpServlet
 {
-    private final Database database;
+    private final ApplicationServiceProvider applicationServiceProvider;
 
-    public UserServlet(Database database)
+    public UserServlet(ApplicationServiceProvider applicationServiceProvider)
     {
-        this.database = database;
+        this.applicationServiceProvider = applicationServiceProvider;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID userId = UUID.fromString(req.getParameter("id"));
-        User user = database.getUser(userId);
+        User user = applicationServiceProvider.database.getUser(userId);
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();
@@ -41,7 +42,7 @@ public class UserServlet extends HttpServlet
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
         User user = stream.readUser();
-        database.createUser(user);
+        applicationServiceProvider.database.createUser(user);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class UserServlet extends HttpServlet
 
         if (userId.equals(user.getId()))
         {
-            database.updateUser(user);
+            applicationServiceProvider.database.updateUser(user);
         }
     }
 
@@ -62,6 +63,6 @@ public class UserServlet extends HttpServlet
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID userId = UUID.fromString(req.getParameter("id"));
-        database.deleteUser(userId);
+        applicationServiceProvider.database.deleteUser(userId);
     }
 }

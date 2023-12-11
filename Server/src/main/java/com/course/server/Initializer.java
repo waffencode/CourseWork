@@ -1,6 +1,6 @@
 package com.course.server;
 
-import com.course.server.database.Database;
+import com.course.server.endpoint.*;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -12,14 +12,15 @@ public class Initializer implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent sce)
     {
-        Database database = new Database();
+        ApplicationServiceProvider applicationServiceProvider = new ApplicationServiceProvider();
         ServletContext context = sce.getServletContext();
-        context.addServlet("ListServlet", new ListServlet(database)).addMapping("/list");
-        context.addServlet("ListArchiveServlet", new ListArchiveServlet(database)).addMapping("/list/archive");
-        context.addServlet("ObjectServlet", new ObjectServlet(database)).addMapping("/object");
-        context.addServlet("ObjectViewListServlet", new ObjectViewListServlet(database)).addMapping("/object/view_list");
-        context.addServlet("UserServlet", new UserServlet(database)).addMapping("/user");
-        context.addServlet("UserLoginServlet", new UserLoginServlet(database)).addMapping("/user/login");
+
+        context.addServlet("ListServlet", new ListServlet(applicationServiceProvider)).addMapping("/list");
+        context.addServlet("ListArchiveServlet", new ListArchiveServlet(applicationServiceProvider)).addMapping("/list/archive");
+        context.addServlet("ObjectServlet", new ObjectServlet(applicationServiceProvider)).addMapping("/object");
+        context.addServlet("ObjectViewListServlet", new ObjectViewListServlet(applicationServiceProvider)).addMapping("/object/view_list");
+        context.addServlet("UserServlet", new UserServlet(applicationServiceProvider)).addMapping("/user");
+        context.addServlet("UserLoginServlet", new UserLoginServlet(applicationServiceProvider)).addMapping("/user/login");
     }
 
     @Override

@@ -1,5 +1,6 @@
-package com.course.server;
+package com.course.server.endpoint;
 
+import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,18 +12,18 @@ import java.util.UUID;
 
 public class ListArchiveServlet extends HttpServlet
 {
-    private final Database database;
+    private final ApplicationServiceProvider applicationServiceProvider;
 
-    public ListArchiveServlet(Database database)
+    public ListArchiveServlet(ApplicationServiceProvider applicationServiceProvider)
     {
-        this.database = database;
+        this.applicationServiceProvider = applicationServiceProvider;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID listId = UUID.fromString(req.getParameter("id"));
-        database.archiveList(listId);
+        applicationServiceProvider.database.archiveList(listId);
     }
 }
 

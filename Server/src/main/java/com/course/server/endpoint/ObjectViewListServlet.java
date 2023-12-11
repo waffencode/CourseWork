@@ -1,5 +1,6 @@
-package com.course.server;
+package com.course.server.endpoint;
 
+import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObject;
 import com.course.server.service.JsonStream;
@@ -15,18 +16,18 @@ import java.util.UUID;
 
 public class ObjectViewListServlet  extends HttpServlet
 {
-    private final Database database;
+    private final ApplicationServiceProvider applicationServiceProvider;
 
-    public ObjectViewListServlet(Database database)
+    public ObjectViewListServlet(ApplicationServiceProvider applicationServiceProvider)
     {
-        this.database = database;
+        this.applicationServiceProvider = applicationServiceProvider;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         UUID listId = UUID.fromString(req.getParameter("list_id"));
-        List<InventoryObject> objects = database.getAllObjectsFromList(listId);
+        List<InventoryObject> objects = applicationServiceProvider.database.getAllObjectsFromList(listId);
 
         resp.setContentType("text/json");
         PrintWriter printWriter = resp.getWriter();

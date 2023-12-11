@@ -1,5 +1,6 @@
-package com.course.server;
+package com.course.server.endpoint;
 
+import com.course.server.ApplicationServiceProvider;
 import com.course.server.database.Database;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,11 +13,11 @@ import java.util.UUID;
 
 public class UserLoginServlet extends HttpServlet
 {
-    private final Database database;
+    private final ApplicationServiceProvider applicationServiceProvider;
 
-    public UserLoginServlet(Database database)
+    public UserLoginServlet(ApplicationServiceProvider applicationServiceProvider)
     {
-        this.database = database;
+        this.applicationServiceProvider = applicationServiceProvider;
     }
 
     @Override
@@ -25,9 +26,9 @@ public class UserLoginServlet extends HttpServlet
         String login = req.getParameter("login");
         String passwordHash = req.getParameter("password_hash");
 
-        if (database.isValidLoginData(login, passwordHash))
+        if (applicationServiceProvider.authenticator.isValidLoginData(login, passwordHash))
         {
-            UUID userId = database.getUserByLogin(login).getId();
+            UUID userId = applicationServiceProvider.database.getUserByLogin(login).getId();
             resp.setContentType("text/plain");
             PrintWriter printWriter = resp.getWriter();
             printWriter.write(userId.toString());
