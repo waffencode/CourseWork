@@ -71,6 +71,34 @@ public class Database
         return null;
     }
 
+    public User getUserByLogin(String login)
+    {
+        User user = new User();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE login = ?;"))
+        {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next())
+            {
+                user.setId(UUID.fromString(resultSet.getString("id")));
+                user.setLogin(resultSet.getString("login"));
+                user.setPasswordHash(resultSet.getString("password_hash"));
+                user.setRole(Role.values()[Integer.parseInt(resultSet.getString("role"))]);
+                user.setRegistrationDate(Timestamp.valueOf(resultSet.getString("registration_date")));
+
+                return user;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public List<User> getAllUsers()
     {
         List<User> users = new ArrayList<>();
@@ -102,6 +130,22 @@ public class Database
 
     public boolean isValidLoginData(String login, String passwordHash)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE login = ? AND password_hash = ?;"))
+        {
+            statement.setString(1, login);
+            statement.setString(2, passwordHash);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next() && resultSet.getInt("count") == 1)
+            {
+                return true;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -155,8 +199,7 @@ public class Database
             {
                 statement.setString(9, object.getDecommissionedById().toString());
                 statement.setTimestamp(10, object.getDecommissionDate());
-            }
-            else
+            } else
             {
                 statement.setNull(9, JDBCType.VARCHAR.ordinal());
                 statement.setNull(10, JDBCType.TIMESTAMP.ordinal());
@@ -273,8 +316,7 @@ public class Database
             {
                 statement.setString(8, object.getDecommissionedById().toString());
                 statement.setTimestamp(9, object.getDecommissionDate());
-            }
-            else
+            } else
             {
                 statement.setNull(8, JDBCType.VARCHAR.ordinal());
                 statement.setNull(9, JDBCType.TIMESTAMP.ordinal());
@@ -318,8 +360,7 @@ public class Database
             {
                 statement.setString(6, list.getArchivedBy().toString());
                 statement.setTimestamp(7, list.getArchivationDate());
-            }
-            else
+            } else
             {
                 statement.setNull(6, JDBCType.VARCHAR.ordinal());
                 statement.setNull(7, JDBCType.TIMESTAMP.ordinal());
@@ -424,8 +465,7 @@ public class Database
             {
                 statement.setString(5, list.getArchivedBy().toString());
                 statement.setTimestamp(6, list.getArchivationDate());
-            }
-            else
+            } else
             {
                 statement.setNull(5, JDBCType.VARCHAR.ordinal());
                 statement.setNull(6, JDBCType.TIMESTAMP.ordinal());
