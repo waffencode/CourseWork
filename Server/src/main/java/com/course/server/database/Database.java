@@ -479,14 +479,44 @@ public class Database
         }
     }
 
-    public void archiveList(UUID listId)
+    public void archiveList(UUID listId, UUID userId)
     {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement statement = connection.prepareStatement("UPDATE inventory_objects SET is_decommissioned = 1 WHERE list_id = ?;"))
+             PreparedStatement updateInventoryObjectsStatement = connection.prepareStatement("UPDATE inventory_objects SET is_decommissioned = 1, decommissioned_by_id = ?, decommission_date = ? WHERE list_id = ?;");
+             PreparedStatement updateListsStatement = connection.prepareStatement("UPDATE lists SET is_archived = 1, archived_by_id = ?, archivation_date = ? WHERE id = ?;"))
         {
-            statement.setString(1, listId.toString());
+            updateInventoryObjectsStatement.setString(1, userId.toString());
+            updateInventoryObjectsStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            updateInventoryObjectsStatement.setString(3, listId.toString());
 
-            statement.execute();
+            updateListsStatement.setString(1, userId.toString());
+            updateListsStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            updateListsStatement.setString(3, listId.toString());
+
+            updateInventoryObjectsStatement.execute();
+            updateListsStatement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void restoreList(UUID listId)
+    {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement updateInventoryObjectsStatement = connection.prepareStatement("UPDATE inventory_objects SET is_decommissioned = 0, decommissioned_by_id = ?, decommission_date = ? WHERE list_id = ?;");
+             PreparedStatement updateListsStatement = connection.prepareStatement("UPDATE lists SET is_archived = 0, archived_by_id = ?, archivation_date = ? WHERE id = ?;"))
+        {
+            updateInventoryObjectsStatement.setNull(1, JDBCType.VARCHAR.ordinal());
+            updateInventoryObjectsStatement.setNull(2, JDBCType.TIMESTAMP.ordinal());
+            updateInventoryObjectsStatement.setString(3, listId.toString());
+
+            updateListsStatement.setNull(1, JDBCType.VARCHAR.ordinal());
+            updateListsStatement.setNull(2, JDBCType.TIMESTAMP.ordinal());
+            updateListsStatement.setString(3, listId.toString());
+
+            updateInventoryObjectsStatement.execute();
+            updateListsStatement.execute();
         } catch (SQLException e)
         {
             e.printStackTrace();
