@@ -16,9 +16,6 @@ public class MainServlet extends HttpServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/json");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.write("0.1.0");
-        printWriter.close();
+
     }
 }

@@ -3,6 +3,7 @@ package com.course.server.service;
 import com.course.server.domain.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.*;
 import java.util.List;
 
@@ -10,10 +11,18 @@ public class JsonStream
 {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final PrintWriter writer;
+    private final BufferedReader reader;
 
     public JsonStream(PrintWriter printWriter)
     {
         writer = printWriter;
+        reader = null;
+    }
+
+    public JsonStream(BufferedReader reader)
+    {
+        this.reader = reader;
+        writer = null;
     }
 
     public void write(User user)
@@ -68,18 +77,49 @@ public class JsonStream
         }
     }
 
-//
-//    public ArrayList<Thermostat> read()
-//    {
-//        ArrayList<Thermostat> list = new ArrayList<>();
-//        try
-//        {
-//            list = objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, Thermostat.class));
-//        } catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
 
+    public User readUser()
+    {
+        User user = new User();
+
+        try
+        {
+            user = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(User.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    public InventoryObjectsList readList()
+    {
+        InventoryObjectsList list = new InventoryObjectsList();
+
+        try
+        {
+            list = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(InventoryObjectsList.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public InventoryObject readObject()
+    {
+        InventoryObject object = new InventoryObject();
+
+        try
+        {
+            object = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(InventoryObject.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return object;
+    }
 }

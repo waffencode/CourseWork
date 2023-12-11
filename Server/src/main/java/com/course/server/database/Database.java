@@ -117,7 +117,34 @@ public class Database
 
     public void createObject(InventoryObject object)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO inventory_objects VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"))
+        {
+            statement.setString(1, object.getInventoryNumber());
+            statement.setString(2, object.getName());
+            statement.setBoolean(3, object.getInPlace());
+            statement.setInt(4, object.getCategory().ordinal());
+            statement.setString(5, object.getListId().toString());
+            statement.setBoolean(6, object.getDecommissioned());
+            statement.setString(7, object.getAddedById().toString());
+            statement.setTimestamp(8, object.getAdditionDate());
 
+            if (object.getDecommissionedById() != null)
+            {
+                statement.setString(9, object.getDecommissionedById().toString());
+                statement.setTimestamp(10, object.getDecommissionDate());
+            }
+            else
+            {
+                statement.setNull(9, JDBCType.VARCHAR.ordinal());
+                statement.setNull(10, JDBCType.TIMESTAMP.ordinal());
+            }
+
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public InventoryObject getObject(String inventoryNumber)
@@ -208,7 +235,31 @@ public class Database
 
     public void createList(InventoryObjectsList list)
     {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO lists VALUES (?, ?, ?, ?, ?, ?, ?);"))
+        {
+            statement.setString(1, list.getId().toString());
+            statement.setString(2, list.getName());
+            statement.setBoolean(3, list.getArchived());
+            statement.setString(4, list.getCreatedById().toString());
+            statement.setTimestamp(5, list.getCreationDate());
 
+            if (list.getArchivedBy() != null)
+            {
+                statement.setString(6, list.getArchivedBy().toString());
+                statement.setTimestamp(7, list.getArchivationDate());
+            }
+            else
+            {
+                statement.setNull(6, JDBCType.VARCHAR.ordinal());
+                statement.setNull(7, JDBCType.TIMESTAMP.ordinal());
+            }
+
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public InventoryObjectsList getList(UUID id)

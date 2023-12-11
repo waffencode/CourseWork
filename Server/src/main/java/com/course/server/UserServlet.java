@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
@@ -37,11 +38,10 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-//        User user = new User();
-//        user.setLogin("Example");
-//        user.setPasswordHash("213123");
-//        user.setRole(Role.USER);
-//        database.createUser(user);
+        BufferedReader reader = req.getReader();
+        JsonStream stream = new JsonStream(reader);
+        User user = stream.readUser();
+        database.createUser(user);
     }
 
     @Override
