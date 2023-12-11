@@ -1,5 +1,6 @@
 package com.course.client;
 
+import com.course.client.ui.NotificationDialog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,10 @@ public class InventoryApplication extends Application
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        NotificationDialog.showInformationDialog("Test");
+        NotificationDialog.showWarningDialog("Test");
+        NotificationDialog.showErrorDialog("Test");
     }
 
     public static void main(String[] args)
