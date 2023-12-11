@@ -14,8 +14,8 @@ public class Initializer implements ServletContextListener
     {
         Database database = new Database();
         ServletContext context = sce.getServletContext();
-        context.addServlet("MainServlet", new MainServlet(database)).addMapping("/hello");
         context.addServlet("ListServlet", new ListServlet(database)).addMapping("/list");
+        context.addServlet("ListArchiveServlet", new ListArchiveServlet(database)).addMapping("/list/archive");
         context.addServlet("ObjectServlet", new ObjectServlet(database)).addMapping("/object");
         context.addServlet("ObjectViewListServlet", new ObjectViewListServlet(database)).addMapping("/object/view_list");
         context.addServlet("UserServlet", new UserServlet(database)).addMapping("/user");

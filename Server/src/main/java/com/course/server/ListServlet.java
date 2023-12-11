@@ -2,8 +2,6 @@ package com.course.server;
 
 import com.course.server.database.Database;
 import com.course.server.domain.InventoryObjectsList;
-import com.course.server.domain.Role;
-import com.course.server.domain.User;
 import com.course.server.service.JsonStream;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

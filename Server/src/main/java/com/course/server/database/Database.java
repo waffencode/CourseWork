@@ -439,6 +439,20 @@ public class Database
         }
     }
 
+    public void archiveList(UUID listId)
+    {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("UPDATE inventory_objects SET is_decommissioned = 1 WHERE list_id = ?;"))
+        {
+            statement.setString(1, listId.toString());
+
+            statement.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteList(UUID id)
     {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
