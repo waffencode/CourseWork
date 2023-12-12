@@ -20,4 +20,12 @@ public class UiContext
     {
         this.stage = stage;
     }
+
+    @Override
+    public String toString()
+    {
+        return "UiContext{" +
+                "stage=" + stage +
+                '}';
+    }
 }

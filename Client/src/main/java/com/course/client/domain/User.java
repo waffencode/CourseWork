@@ -8,7 +8,7 @@ public class User
     private UUID id = UUID.randomUUID();
     private String login;
     private String passwordHash;
-    private Role role;
+    private Role role = Role.USER;
     private Timestamp registrationDate = new Timestamp(System.currentTimeMillis());
 
     public UUID getId()

@@ -83,13 +83,13 @@ public class JsonStream
     }
 
 
-    public User readUser()
+    public User readUser(String json)
     {
         User user = new User();
 
         try
         {
-            user = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(User.class));
+            user = objectMapper.readValue(json, objectMapper.getTypeFactory().constructType(User.class));
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -98,13 +98,13 @@ public class JsonStream
         return user;
     }
 
-    public InventoryObjectsList readList()
+    public InventoryObjectsList readList(String json)
     {
         InventoryObjectsList list = new InventoryObjectsList();
 
         try
         {
-            list = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(InventoryObjectsList.class));
+            list = objectMapper.readValue(json, objectMapper.getTypeFactory().constructType(InventoryObjectsList.class));
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -113,13 +113,13 @@ public class JsonStream
         return list;
     }
 
-    public InventoryObject readObject()
+    public InventoryObject readObject(String json)
     {
         InventoryObject object = new InventoryObject();
 
         try
         {
-            object = objectMapper.readValue(reader, objectMapper.getTypeFactory().constructType(InventoryObject.class));
+            object = objectMapper.readValue(json, objectMapper.getTypeFactory().constructType(InventoryObject.class));
         } catch (IOException e)
         {
             e.printStackTrace();

@@ -1,6 +1,5 @@
 package com.course.client.ui;
 
-import com.course.client.controllers.LoginController;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import javafx.fxml.FXMLLoader;

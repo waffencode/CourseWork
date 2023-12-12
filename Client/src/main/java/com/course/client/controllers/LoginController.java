@@ -28,6 +28,7 @@ public class LoginController extends SceneController
 
         if (authorizedUserId != null)
         {
+            modelContext.setCurrentUser(modelContext.getRequestHandler().getUser(authorizedUserId, authorizedUserId));
             uiContext.getStage().setScene(new SceneProvider().getPreparedScene("MainMenuView.fxml", modelContext, uiContext));
         }
         else

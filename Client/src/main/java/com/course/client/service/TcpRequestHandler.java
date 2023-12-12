@@ -27,9 +27,15 @@ public class TcpRequestHandler
         sendPost(path, query, data);
     }
 
-    public User getUser(UUID id)
+    public User getUser(UUID id, UUID by)
     {
-        return new User();
+        String path = "/inventory/user";
+        String query = "id=" + id.toString() + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        String[] parts = response.split("\n\n");
+        String json = parts[1];
+
+        return new JsonStream().readUser(json);
     }
 
     public User getUserByLogin(String login)
@@ -150,8 +156,6 @@ public class TcpRequestHandler
                     "Host: " + host + "\r\n" +
                     "Connection: close\r\n\r\n";
 
-            System.out.println(request);
-
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
@@ -185,8 +189,6 @@ public class TcpRequestHandler
                     "Content-Length: " + body.length() + "\r\n" +
                     "Connection: close\r\n\r\n" +
                     body;
-
-            System.out.println(request);
 
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
 //            StringBuilder response = new StringBuilder();
