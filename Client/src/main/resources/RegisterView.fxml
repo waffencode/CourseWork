@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import com.course.client.domain.Role?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.RegistrationController">
+<children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <children>
+            <TextField fx:id="loginField" layoutX="283.0" layoutY="300.0" promptText="Логин" />
+            <TextField fx:id="passwordField" layoutX="283.0" layoutY="339.0" promptText="Пароль" />
+            <Button fx:id="signUpButton" layoutX="283.0" layoutY="430.0" mnemonicParsing="false" onAction="#onRegisterButtonClicked" prefHeight="26.0" prefWidth="97.0" text="Регистрация" />
+            <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="Регистрация нового пользователя" />
+            <ChoiceBox fx:id="selectRoleChoice" layoutX="283.0" layoutY="383.0" prefWidth="150.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Role fx:value="USER" />
+                    <Role fx:value="INVENTORY_OFFICER" />
+                    <Role fx:value="ADMINISTRATOR"/>
+                </FXCollections>
+            </items>
+            </ChoiceBox>
+        </children>
+    </AnchorPane>
+</children>
+</VBox>

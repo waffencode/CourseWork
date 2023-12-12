@@ -10,71 +10,76 @@ import java.util.List;
 public class JsonStream
 {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final PrintWriter writer;
     private final BufferedReader reader;
 
-    public JsonStream(PrintWriter printWriter)
+    public JsonStream()
     {
-        writer = printWriter;
         reader = null;
     }
 
     public JsonStream(BufferedReader reader)
     {
         this.reader = reader;
-        writer = null;
     }
 
-    public void write(User user)
+    public String writeAsString(User user)
     {
         try
         {
-            objectMapper.writerFor(new TypeReference<User>()
+            return objectMapper.writerFor(new TypeReference<User>()
             {
-            }).writeValue(writer, user);
+            }).writeValueAsString(user);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        return null;
     }
 
-    public void write(InventoryObjectsList list)
+    public String writeAsString(InventoryObjectsList list)
     {
         try
         {
-            objectMapper.writerFor(new TypeReference<InventoryObjectsList>()
+            return objectMapper.writerFor(new TypeReference<InventoryObjectsList>()
             {
-            }).writeValue(writer, list);
+            }).writeValueAsString(list);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        return null;
     }
 
-    public void write(InventoryObject object)
+    public String writeAsString(InventoryObject object)
     {
         try
         {
-            objectMapper.writerFor(new TypeReference<InventoryObject>()
+            return objectMapper.writerFor(new TypeReference<InventoryObject>()
             {
-            }).writeValue(writer, object);
+            }).writeValueAsString(object);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        return null;
     }
 
-    public void write(List<InventoryObject> objects)
+    public String writeAsString(List<InventoryObject> objects)
     {
         try
         {
-            objectMapper.writerFor(new TypeReference<List<InventoryObject>>()
+            return objectMapper.writerFor(new TypeReference<List<InventoryObject>>()
             {
-            }).writeValue(writer, objects);
+            }).writeValueAsString(objects);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        return null;
     }
 
 

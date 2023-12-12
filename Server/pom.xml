@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.course</groupId>
-    <artifactId>Server</artifactId>
-    <version>0.1.0</version>
+    <artifactId>inventory</artifactId>
+	<version>0.1.0</version>
     <packaging>war</packaging>
 
     <dependencies>
@@ -45,6 +45,7 @@
     </properties>
 
     <build>
+		<finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
