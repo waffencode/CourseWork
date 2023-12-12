@@ -12,9 +12,6 @@ import java.util.UUID;
 public class LoginController extends SceneController
 {
     @FXML
-    private Button signInButton, signUpButton;
-
-    @FXML
     private TextField loginField;
 
     @FXML
@@ -42,6 +39,6 @@ public class LoginController extends SceneController
     @FXML
     private void onSignUpButtonClicked()
     {
-        System.out.println("signUpButton clicked with data:\nLogin: " + loginField.getText() + "\nPassword: " + passwordField.getText());
+        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("RegisterView.fxml", modelContext, uiContext));
     }
 }

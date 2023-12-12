@@ -1,5 +1,6 @@
 package com.course.client;
 
+import com.course.client.controllers.LoginController;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import com.course.client.ui.SceneProvider;
