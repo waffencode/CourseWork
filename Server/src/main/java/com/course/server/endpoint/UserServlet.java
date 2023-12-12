@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet
         {
             User user = applicationServiceProvider.database.getUser(userId);
 
-            resp.setContentType("text/json");
+            resp.setContentType("application/json");
             PrintWriter printWriter = resp.getWriter();
             JsonStream stream = new JsonStream(printWriter);
             stream.write(user);
@@ -45,6 +45,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        System.out.println("POST USER:" + req.toString());
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
         User user = stream.readUser();

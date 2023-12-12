@@ -21,7 +21,7 @@ public class TcpRequestHandler
 
     public void createUser(User user)
     {
-        String path = "inventory/user";
+        String path = "/inventory/user";
         String query = "by=" + user.getId().toString();
         String data = new JsonStream().writeAsString(user);
         sendPost(path, query, data);
@@ -44,7 +44,7 @@ public class TcpRequestHandler
 
     public UUID tryAuthorizeLoginData(String login, String passwordHash)
     {
-        String path = "inventory/user/login";
+        String path = "/inventory/user/login";
         String query = "login=" + login + "&password_hash=" + passwordHash;
         String response = sendGet(path, query);
 
@@ -150,6 +150,8 @@ public class TcpRequestHandler
                     "Host: " + host + "\r\n" +
                     "Connection: close\r\n\r\n";
 
+            System.out.println(request);
+
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
@@ -177,12 +179,14 @@ public class TcpRequestHandler
              OutputStream outputStream = socket.getOutputStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
         {
-            String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" +
+            String request = "POST " + path + " HTTP/1.1\r\n" +
                     "Host: " + host + "\r\n" +
                     "Content-Type: application/json\r\n" +
                     "Content-Length: " + body.length() + "\r\n" +
                     "Connection: close\r\n\r\n" +
                     body;
+
+            System.out.println(request);
 
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
 //            StringBuilder response = new StringBuilder();
