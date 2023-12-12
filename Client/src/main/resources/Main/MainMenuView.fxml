@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.MainMenuController">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.main.MainMenuController">
     <AnchorPane VBox.vgrow="ALWAYS">
         <Button fx:id="usersMenuButton" layoutX="294.0" layoutY="287.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" text="Пользователи" />
         <Button fx:id="inventoryMenuButton" layoutX="294.0" layoutY="242.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Инвентарь" />

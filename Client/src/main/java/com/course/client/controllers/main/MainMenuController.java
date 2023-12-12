@@ -1,4 +1,4 @@
-package com.course.client.controllers;
+package com.course.client.controllers.main;
 
 import com.course.client.domain.User;
 import com.course.client.service.ModelContext;

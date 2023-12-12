@@ -1,4 +1,4 @@
-package com.course.client.controllers;
+package com.course.client.controllers.auth;
 
 import com.course.client.service.HashProvider;
 import com.course.client.ui.NotificationDialog;
@@ -29,7 +29,7 @@ public class LoginController extends SceneController
         if (authorizedUserId != null)
         {
             modelContext.setCurrentUser(modelContext.getRequestHandler().getUser(authorizedUserId, authorizedUserId));
-            uiContext.getStage().setScene(new SceneProvider().getPreparedScene("MainMenuView.fxml", modelContext, uiContext));
+            uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Main/MainMenuView.fxml", modelContext, uiContext));
         }
         else
         {
@@ -40,6 +40,6 @@ public class LoginController extends SceneController
     @FXML
     private void onSignUpButtonClicked()
     {
-        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("RegisterView.fxml", modelContext, uiContext));
+        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Auth/RegisterView.fxml", modelContext, uiContext));
     }
 }

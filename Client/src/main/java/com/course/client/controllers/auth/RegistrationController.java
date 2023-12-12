@@ -1,4 +1,4 @@
-package com.course.client.controllers;
+package com.course.client.controllers.auth;
 
 import com.course.client.domain.Role;
 import com.course.client.domain.User;
@@ -24,6 +24,6 @@ public class RegistrationController extends SceneController
 
         System.out.println("Register:" + user);
         modelContext.getRequestHandler().createUser(user);
-        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("LoginView.fxml", modelContext, uiContext));
+        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Auth/LoginView.fxml", modelContext, uiContext));
     }
 }

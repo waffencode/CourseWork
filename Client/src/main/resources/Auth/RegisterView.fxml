@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.RegistrationController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.auth.RegistrationController">
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
         <TextField fx:id="loginField" layoutX="283.0" layoutY="300.0" promptText="Логин"/>
         <TextField fx:id="passwordField" layoutX="283.0" layoutY="339.0" promptText="Пароль"/>
