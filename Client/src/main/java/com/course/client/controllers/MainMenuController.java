@@ -4,6 +4,7 @@ import com.course.client.domain.User;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import com.course.client.ui.SceneController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,5 +31,10 @@ public class MainMenuController extends SceneController
         userLoginLabel.setText("Авторизованный пользователь: " + currentUser.getLogin());
         userIdLabel.setText("ID: " + currentUser.getId().toString());
         userRoleLabel.setText("Уровень доступа: " + currentUser.getRole().name());
+    }
+
+    public void onExitButtonClicked()
+    {
+        modelContext.getApplication().exit();
     }
 }
