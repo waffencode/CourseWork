@@ -33,8 +33,27 @@ public class MainMenuController extends SceneController
         userRoleLabel.setText("Уровень доступа: " + currentUser.getRole().name());
     }
 
-    public void onExitButtonClicked()
+    @FXML
+    private void onExitButtonClicked()
     {
         modelContext.getApplication().exit();
+    }
+
+    @FXML
+    private void onUsersButtonClicked()
+    {
+
+    }
+
+    @FXML
+    private void onInventoryButtonClicked()
+    {
+
+    }
+
+    @FXML
+    private void onSettingsButtonClicked()
+    {
+
     }
 }

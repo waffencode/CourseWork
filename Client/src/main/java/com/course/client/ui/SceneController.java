@@ -22,4 +22,9 @@ public abstract class SceneController
         this.modelContext = modelContext;
         this.uiContext = uiContext;
     }
+
+    protected void goToSceneWithResource(String fxmlFile)
+    {
+        uiContext.getStage().setScene(new SceneProvider().getPreparedScene(fxmlFile, modelContext, uiContext));
+    }
 }

@@ -29,7 +29,7 @@ public class LoginController extends SceneController
         if (authorizedUserId != null)
         {
             modelContext.setCurrentUser(modelContext.getRequestHandler().getUser(authorizedUserId, authorizedUserId));
-            uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Main/MainMenuView.fxml", modelContext, uiContext));
+            goToSceneWithResource("Main/MainMenuView.fxml");
         }
         else
         {
@@ -40,6 +40,6 @@ public class LoginController extends SceneController
     @FXML
     private void onSignUpButtonClicked()
     {
-        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Auth/RegisterView.fxml", modelContext, uiContext));
+        goToSceneWithResource("Auth/RegisterView.fxml");
     }
 }

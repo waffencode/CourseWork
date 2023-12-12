@@ -21,9 +21,8 @@ public class RegistrationController extends SceneController
         String passwordHash = HashProvider.getStringHash(passwordField.getText());
         user.setPasswordHash(passwordHash);
         user.setRole(Role.USER);
-
-        System.out.println("Register:" + user);
         modelContext.getRequestHandler().createUser(user);
-        uiContext.getStage().setScene(new SceneProvider().getPreparedScene("Auth/LoginView.fxml", modelContext, uiContext));
+
+        goToSceneWithResource("Auth/LoginView.fxml");
     }
 }
