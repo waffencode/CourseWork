@@ -1,34 +1,29 @@
 package com.course.client.controllers;
 
-import com.course.client.InventoryApplication;
 import com.course.client.ui.SceneController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-import java.util.Objects;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class LoginController extends SceneController
 {
-    Parent root;
+    @FXML
+    private Button signInButton, signUpButton;
 
-    public LoginController(InventoryApplication application)
+    @FXML
+    private TextField loginField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private void onSignInButtonClicked()
     {
-        super(application);
-
-        try
-        {
-            root = FXMLLoader.load(application.getClass().getClassLoader().getResource("LoginView.fxml"));
-            scene = new Scene(root);
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+        System.out.println("signInButton clicked with data:\nLogin: " + loginField.getText() + "\nPassword: " + passwordField.getText());
     }
 
-    @Override
-    public void update()
+    @FXML
+    private void onSignUpButtonClicked()
     {
-
+        System.out.println("signUpButton clicked with data:\nLogin: " + loginField.getText() + "\nPassword: " + passwordField.getText());
     }
 }

@@ -1,26 +1,25 @@
 package com.course.client.ui;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import com.course.client.InventoryApplication;
+import com.course.client.service.*;
 
 public abstract class SceneController
 {
-    protected Stage stage;
-    protected Scene scene;
+    protected ModelContext modelContext;
+    protected UiContext uiContext;
 
-    protected InventoryApplication application;
-
-    public SceneController(InventoryApplication application)
+    public ModelContext getModelContext()
     {
-        this.application = application;
-        this.stage = application.stage;
+        return modelContext;
     }
 
-    public Scene getScene()
+    public UiContext getUiContext()
     {
-        return scene;
+        return uiContext;
     }
 
-    public abstract void update();
+    public void setContext(ModelContext modelContext, UiContext uiContext)
+    {
+        this.modelContext = modelContext;
+        this.uiContext = uiContext;
+    }
 }

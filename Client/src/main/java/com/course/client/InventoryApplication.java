@@ -1,6 +1,8 @@
 package com.course.client;
 
-import com.course.client.controllers.LoginController;
+import com.course.client.service.ModelContext;
+import com.course.client.service.UiContext;
+import com.course.client.ui.SceneProvider;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,9 +15,10 @@ public class InventoryApplication extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        stage.setScene(new LoginController(this).getScene());
+        ModelContext modelContext = new ModelContext();
+        UiContext uiContext = new UiContext(stage);
+        stage.setScene(new SceneProvider().getPreparedScene("LoginView.fxml", modelContext, uiContext));
         stage.show();
-        stage.setMaximized(true);
     }
 
     public static void main(String[] args)
