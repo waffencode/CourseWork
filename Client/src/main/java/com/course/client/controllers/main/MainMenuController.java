@@ -67,12 +67,12 @@ public class MainMenuController extends SceneController
     @FXML
     private void onExportButtonClicked()
     {
-
+        goToSceneWithResource("External/ExportView.fxml");
     }
 
     @FXML
     private void onImportButtonClicked()
     {
-
+        goToSceneWithResource("External/ImportView.fxml");
     }
 }
