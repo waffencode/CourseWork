@@ -7,12 +7,12 @@ public class InventoryObject
 {
     private String inventoryNumber;
     private String name;
-    private Boolean isInPlace;
-    private Category category;
+    private Boolean isInPlace = false;
+    private Category category = Category.OTHER;
     private UUID listId;
-    private Boolean isDecommissioned;
+    private Boolean isDecommissioned = false;
     private UUID addedById;
-    private Timestamp additionDate;
+    private Timestamp additionDate = new Timestamp(System.currentTimeMillis());
     private UUID decommissionedById;
     private Timestamp decommissionDate;
 

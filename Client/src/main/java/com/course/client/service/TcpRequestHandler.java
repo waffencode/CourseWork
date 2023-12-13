@@ -84,14 +84,20 @@ public class TcpRequestHandler
 
     }
 
-    public void createObject(InventoryObject object)
+    public void createObject(InventoryObject object, UUID by)
     {
-
+        String path = "/inventory/object";
+        String query = "by=" + by.toString();
+        String data = new JsonStream().writeAsString(object);
+        sendPostWithQuery(path, query, data);
     }
 
-    public InventoryObject getObject(String inventoryNumber)
+    public InventoryObject getObject(String inventoryNumber, UUID by)
     {
-        return new InventoryObject();
+        String path = "/inventory/object";
+        String query = "id=" + inventoryNumber.toString() + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        return new JsonStream().readObject(getJsonFromResponse(response));
     }
 
     public List<InventoryObject> getAllObjectsFromList(UUID listId, UUID by)

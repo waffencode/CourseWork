@@ -8,7 +8,9 @@
     <Button layoutX="305.0" layoutY="379.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
     <Button layoutX="370.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="88.0" text="Создать" />
     <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="CreateObjectView.fxml" />
-    <TextField fx:id="listName" layoutX="308.0" layoutY="337.0" promptText="Имя объекта" />
-    <ChoiceBox fx:id="selectCategoryChoice" layoutX="283.0" layoutY="383.0" prefWidth="150.0" />
+    <TextField fx:id="inventoryNumberField" layoutX="304.0" layoutY="125.0" promptText="Инвентарный номер" />
+    <TextField fx:id="nameField" layoutX="304.0" layoutY="162.0" promptText="Имя объекта" />
+    <ChoiceBox fx:id="selectCategoryChoice" layoutX="304.0" layoutY="199.0" prefWidth="150.0" />
+    <CheckBox fx:id="isInPlaceCheckbox" layoutX="305.0" layoutY="236.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="163.0" text="В наличии" />
 </AnchorPane>
 </VBox>
