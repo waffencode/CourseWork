@@ -63,9 +63,11 @@ public class TcpRequestHandler
         sendPut(path, query, data);
     }
 
-    public void deleteUser(UUID id)
+    public void deleteUser(UUID id, UUID by)
     {
-
+        String path = "/inventory/user";
+        String query = "id=" + id.toString() + "&by=" + by.toString();
+        sendDelete(path, query);
     }
 
     public void createObject(InventoryObject object, UUID by)
@@ -105,7 +107,7 @@ public class TcpRequestHandler
     public void deleteObject(String inventoryNumber, UUID by)
     {
         String path = "/inventory/object";
-        String query = "id=" + inventoryNumber.toString() + "&by=" + by.toString();
+        String query = "id=" + inventoryNumber + "&by=" + by.toString();
         sendDelete(path, query);
     }
 

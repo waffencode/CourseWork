@@ -64,12 +64,6 @@ public class User
     @Override
     public String toString()
     {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", role=" + role +
-                ", registrationDate=" + registrationDate +
-                '}';
+        return login + " (ID: " + id.toString() + ")";
     }
 }

@@ -47,7 +47,7 @@ public class UserListController extends SceneController
     {
         if (usersList.getSelectionModel().getSelectedItem() == null)
         {
-            NotificationDialog.showWarningDialog("Необходимо выбрать список для редактирования!");
+            NotificationDialog.showWarningDialog("Необходимо выбрать пользователя для редактирования!");
             return;
         }
 
@@ -57,6 +57,24 @@ public class UserListController extends SceneController
         {
             modelContext.setCurrentUserOnEditId(selectedUserId);
             goToSceneWithResource("User/EditUserView.fxml");
+        }
+    }
+
+    @FXML
+    private void onDeleteButtonClicked()
+    {
+        if (usersList.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать пользователя для удаления!");
+            return;
+        }
+
+        UUID selectedUserId = usersList.getSelectionModel().getSelectedItem().getId();
+
+        if (selectedUserId != null)
+        {
+            modelContext.getRequestHandler().deleteUser(selectedUserId, modelContext.getCurrentUser().getId());
+            updateList();
         }
     }
 }

@@ -5,9 +5,10 @@
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.user.UserListController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
-    <Button fx:id="backButton" layoutX="411.0" layoutY="384.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
-    <Button fx:id="editButton" layoutX="411.0" layoutY="384.0" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать" />
-    <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="UserListView.fxml" />
-    <ListView fx:id="usersList" layoutX="190.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" />
+    <Button layoutX="411.0" layoutY="287.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
+    <Button layoutX="411.0" layoutY="244.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" text="Удалить" />
+    <Button layoutX="411.0" layoutY="200.0" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать" />
+    <Label layoutX="190.0" layoutY="14.0" prefHeight="43.0" prefWidth="241.0" text="UserListView.fxml" />
+    <ListView fx:id="usersList" layoutX="93.0" layoutY="200.0" prefHeight="243.0" prefWidth="297.0" />
 </AnchorPane>
 </VBox>

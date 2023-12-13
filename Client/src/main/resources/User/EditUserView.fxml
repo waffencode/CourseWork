@@ -9,7 +9,9 @@
     <Button fx:id="applyButton" layoutX="262.0" layoutY="287.0" mnemonicParsing="false" onAction="#onApplyButtonClicked" text="Применить" />
     <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="EditUserView.fxml" />
     <Label fx:id="currentUserLabel" layoutX="182.0" layoutY="53.0" prefHeight="45.0" prefWidth="294.0" text="Пользователь: " />
-    <TextField layoutX="192.0" layoutY="197.0" />
+    <TextField fx:id="userLoginField" layoutX="192.0" layoutY="197.0" />
     <ChoiceBox fx:id="selectRoleChoice" layoutX="191.0" layoutY="237.0" prefWidth="150.0" />
+      <Label layoutX="148.0" layoutY="201.0" text="Логин" />
+      <Label layoutX="92.0" layoutY="241.0" text="Уровень доступа" />
 </AnchorPane>
 </VBox>
