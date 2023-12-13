@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 public class ListServlet extends HttpServlet
@@ -31,14 +32,27 @@ public class ListServlet extends HttpServlet
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById))
         {
-            UUID listId = UUID.fromString(req.getParameter("id"));
-            InventoryObjectsList list = applicationServiceProvider.database.getList(listId);
+            if (req.getParameter("id") == null)
+            {
+                List<InventoryObjectsList> list = applicationServiceProvider.database.getAllLists();
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.writeList(list);
+                printWriter.close();
+            }
+            else
+            {
+                UUID listId = UUID.fromString(req.getParameter("id"));
 
-            resp.setContentType("text/json");
-            PrintWriter printWriter = resp.getWriter();
-            JsonStream stream = new JsonStream(printWriter);
-            stream.write(list);
-            printWriter.close();
+                InventoryObjectsList list = applicationServiceProvider.database.getList(listId);
+
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.write(list);
+                printWriter.close();
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JsonStream
@@ -115,5 +116,35 @@ public class JsonStream
         }
 
         return object;
+    }
+
+    public List<InventoryObject> readObjectArray(String json)
+    {
+        List<InventoryObject> list = new ArrayList<>();
+
+        try
+        {
+            list = objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, InventoryObject.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<InventoryObjectsList> readListArray(String json)
+    {
+        List<InventoryObjectsList> list = new ArrayList<>();
+
+        try
+        {
+            list = objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, InventoryObjectsList.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

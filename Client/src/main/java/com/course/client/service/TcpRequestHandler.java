@@ -32,10 +32,7 @@ public class TcpRequestHandler
         String path = "/inventory/user";
         String query = "id=" + id.toString() + "&by=" + by.toString();
         String response = sendGet(path, query);
-        String[] parts = response.split("\n\n");
-        String json = parts[1];
-
-        return new JsonStream().readUser(json);
+        return new JsonStream().readUser(getJsonFromResponse(response));
     }
 
     public User getUserByLogin(String login)
@@ -76,6 +73,12 @@ public class TcpRequestHandler
         return null;
     }
 
+    private String getJsonFromResponse(String response)
+    {
+        String[] parts = response.split("\n\n");
+        return parts[1];
+    }
+
     public void updateUser(User user)
     {
 
@@ -96,9 +99,14 @@ public class TcpRequestHandler
         return new InventoryObject();
     }
 
-    public List<InventoryObject> getAllObjectsFromList(UUID listId)
+    public List<InventoryObject> getAllObjectsFromList(UUID listId, UUID by)
     {
-        return new ArrayList<InventoryObject>();
+        String path = "/inventory/object/view_list";
+        String query = "list_id=" +listId.toString() + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+        System.out.println(json);
+        return new JsonStream().readObjectArray(json);
     }
 
     public void updateObject(InventoryObject object)
@@ -121,9 +129,14 @@ public class TcpRequestHandler
         return new InventoryObjectsList();
     }
 
-    public List<InventoryObjectsList> getAllLists()
+    public List<InventoryObjectsList> getAllLists(UUID by)
     {
-        return new ArrayList<InventoryObjectsList>();
+        String path = "/inventory/list";
+        String query = "by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+        System.out.println(json);
+        return new JsonStream().readListArray(json);
     }
 
     public void updateList(InventoryObjectsList list)

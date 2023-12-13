@@ -51,6 +51,19 @@ public class JsonStream
         }
     }
 
+    public void writeList(List<InventoryObjectsList> lists)
+    {
+        try
+        {
+            objectMapper.writerFor(new TypeReference<List<InventoryObjectsList>>()
+            {
+            }).writeValue(writer, lists);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void write(InventoryObject object)
     {
         try
