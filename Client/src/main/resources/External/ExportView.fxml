@@ -11,7 +11,7 @@
         <ListView fx:id="listsView" layoutX="70.0" layoutY="126.0" prefHeight="216.0" prefWidth="316.0" />
         <Label layoutX="414.0" layoutY="126.0" text="Для экспорта выберите формат и требуемый список." />
         <Label layoutX="414.0" layoutY="151.0" text="Если список не выбран, будет произведён экспорт всей БД." />
-        <RadioButton layoutX="415.0" layoutY="191.0" mnemonicParsing="false" text="CSV" />
-        <RadioButton layoutX="415.0" layoutY="217.0" mnemonicParsing="false" text="JSON" />
+        <RadioButton fx:id="csvFormatButton" layoutX="415.0" layoutY="191.0" mnemonicParsing="false" text="CSV" />
+        <RadioButton fx:id="jsonFormatButton" layoutX="415.0" layoutY="217.0" mnemonicParsing="false" text="JSON" />
     </AnchorPane>
 </VBox>

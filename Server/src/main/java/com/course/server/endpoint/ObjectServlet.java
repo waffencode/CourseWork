@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 public class ObjectServlet extends HttpServlet
@@ -32,13 +33,27 @@ public class ObjectServlet extends HttpServlet
         if (applicationServiceProvider.authenticator.isValidUser(issuedById))
         {
             String inventoryNumber = req.getParameter("id");
-            InventoryObject object = applicationServiceProvider.database.getObject(inventoryNumber);
 
-            resp.setContentType("text/json");
-            PrintWriter printWriter = resp.getWriter();
-            JsonStream stream = new JsonStream(printWriter);
-            stream.write(object);
-            printWriter.close();
+            if (inventoryNumber == null)
+            {
+                List<InventoryObject> object = applicationServiceProvider.database.getAllObjects();
+
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.write(object);
+                printWriter.close();
+            }
+            else
+            {
+                InventoryObject object = applicationServiceProvider.database.getObject(inventoryNumber);
+
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.write(object);
+                printWriter.close();
+            }
         }
     }
 

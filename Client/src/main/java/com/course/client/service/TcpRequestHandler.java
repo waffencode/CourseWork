@@ -96,6 +96,16 @@ public class TcpRequestHandler
         return new JsonStream().readObjectArray(json);
     }
 
+    public List<InventoryObject> getAllObjects(UUID by)
+    {
+        String path = "/inventory/object";
+        String query = "by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+
+        return new JsonStream().readObjectArray(json);
+    }
+
     public void updateObject(InventoryObject object, UUID by)
     {
         String path = "/inventory/object";
