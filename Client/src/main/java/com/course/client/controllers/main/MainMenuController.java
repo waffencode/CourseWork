@@ -63,4 +63,16 @@ public class MainMenuController extends SceneController
         modelContext.setCurrentUser(null);
         goToSceneWithResource("Auth/LoginView.fxml");
     }
+
+    @FXML
+    private void onExportButtonClicked()
+    {
+
+    }
+
+    @FXML
+    private void onImportButtonClicked()
+    {
+
+    }
 }
