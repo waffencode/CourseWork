@@ -3,6 +3,7 @@ package com.course.client.controllers.inventory;
 import com.course.client.domain.InventoryObject;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
+import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,5 +53,71 @@ public class ObjectsController extends SceneController
     private void onAddButtonClicked()
     {
         goToSceneWithResource("Inventory/CreateObjectView.fxml");
+    }
+
+    @FXML
+    private void onViewButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать объект для просмотра!");
+            return;
+        }
+
+        String selectedListId = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
+
+        if (selectedListId != null)
+        {
+            modelContext.setCurrentObjectId(selectedListId);
+            goToSceneWithResource("Inventory/ObjectDataView.fxml");
+        }
+    }
+
+    @FXML
+    private void onEditButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать объект для редактирования!");
+            return;
+        }
+
+        String selectedListId = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
+
+        if (selectedListId != null)
+        {
+            modelContext.setCurrentObjectId(selectedListId);
+            goToSceneWithResource("Inventory/EditObjectView.fxml");
+        }
+    }
+
+    @FXML
+    private void onDecommissionButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать объект для списания!");
+            return;
+        }
+    }
+
+    @FXML
+    private void onDeleteButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать объект для удаления!");
+            return;
+        }
+    }
+
+    @FXML
+    private void onMoveButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать объект для изменения списка!");
+            return;
+        }
     }
 }

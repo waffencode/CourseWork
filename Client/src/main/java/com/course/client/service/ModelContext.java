@@ -12,7 +12,7 @@ public class ModelContext
     private User currentUser;
 
     private UUID currentListId = null;
-    private UUID currentObjectId = null;
+    private String currentObjectId = null;
     private UUID currentUserOnEditId = null;
 
     public ModelContext(InventoryApplication application)
@@ -30,12 +30,12 @@ public class ModelContext
         this.currentListId = currentListId;
     }
 
-    public UUID getCurrentObjectId()
+    public String getCurrentObjectId()
     {
         return currentObjectId;
     }
 
-    public void setCurrentObjectId(UUID currentObjectId)
+    public void setCurrentObjectId(String currentObjectId)
     {
         this.currentObjectId = currentObjectId;
     }

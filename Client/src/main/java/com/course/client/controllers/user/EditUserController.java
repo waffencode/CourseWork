@@ -49,6 +49,7 @@ public class EditUserController extends SceneController
     @FXML
     private void onApplyButtonClicked()
     {
-
+        modelContext.setCurrentUserOnEditId(null);
+        goToSceneWithResource("User/UserListView.fxml");
     }
 }
