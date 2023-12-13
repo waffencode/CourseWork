@@ -4,6 +4,7 @@ import com.course.client.service.HashProvider;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import com.course.client.ui.SceneProvider;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -20,6 +21,12 @@ public class LoginController extends SceneController
     @FXML
     private void onSignInButtonClicked()
     {
+        if (loginField.getText().isBlank() || passwordField.getText().isBlank())
+        {
+            NotificationDialog.showInformationDialog("Введите имя пользователя и пароль!");
+            return;
+        }
+
         String login = loginField.getText();
         String password = passwordField.getText();
         String passwordHash = HashProvider.getStringHash(password);
@@ -41,5 +48,11 @@ public class LoginController extends SceneController
     private void onSignUpButtonClicked()
     {
         goToSceneWithResource("Auth/RegisterView.fxml");
+    }
+
+    @FXML
+    private void onExitButtonClicked()
+    {
+        modelContext.getApplication().exit();
     }
 }

@@ -4,6 +4,7 @@ import com.course.client.domain.User;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import com.course.client.ui.SceneController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -54,5 +55,12 @@ public class MainMenuController extends SceneController
     private void onSettingsButtonClicked()
     {
         goToSceneWithResource("Settings/SettingsView.fxml");
+    }
+
+    @FXML
+    private void onLogoutButtonClicked()
+    {
+        modelContext.setCurrentUser(null);
+        goToSceneWithResource("Auth/LoginView.fxml");
     }
 }
