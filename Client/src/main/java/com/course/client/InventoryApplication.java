@@ -1,8 +1,7 @@
 package com.course.client;
 
-import com.course.client.service.ModelContext;
-import com.course.client.service.UiContext;
-import com.course.client.ui.SceneProvider;
+import com.course.client.service.*;
+import com.course.client.ui.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -10,8 +9,6 @@ import java.io.IOException;
 
 public class InventoryApplication extends Application
 {
-    public Stage stage;
-
     @Override
     public void start(Stage stage) throws IOException
     {
@@ -28,13 +25,13 @@ public class InventoryApplication extends Application
 
     public void exit()
     {
-        stop();
-        System.exit(0);
-    }
-
-    @Override
-    public void stop()
-    {
-
+        try
+        {
+            stop();
+            System.exit(0);
+        } catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
