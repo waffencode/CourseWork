@@ -59,6 +59,12 @@ public class CreateObjectController extends SceneController
             return;
         }
 
+        if (!containsOnlyAllowedCharacters(nameField.getText()))
+        {
+            NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            return;
+        }
+
         InventoryObject object = new InventoryObject();
         object.setInventoryNumber(inventoryNumberField.getText());
         object.setName(nameField.getText());
@@ -81,6 +87,12 @@ public class CreateObjectController extends SceneController
     private static boolean containsOnlyDigits(String str)
     {
         String regex = "\\d+";
+        return str.matches(regex);
+    }
+
+    private static boolean containsOnlyAllowedCharacters(String str)
+    {
+        String regex = "^[a-zA-Z0-9\\p{Punct} ]+$";
         return str.matches(regex);
     }
 }

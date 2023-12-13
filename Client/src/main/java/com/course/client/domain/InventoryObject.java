@@ -119,17 +119,6 @@ public class InventoryObject
     @Override
     public String toString()
     {
-        return "InventoryObject{" +
-                "inventoryNumber='" + inventoryNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", isInPlace=" + isInPlace +
-                ", category=" + category +
-                ", listId=" + listId +
-                ", isDecommissioned=" + isDecommissioned +
-                ", addedById=" + addedById +
-                ", additionDate=" + additionDate +
-                ", decommissionedById=" + decommissionedById +
-                ", decommissionDate=" + decommissionDate +
-                '}';
+        return inventoryNumber + " (" + name + ")" + (isDecommissioned ? " [Списан]" : "");
     }
 }

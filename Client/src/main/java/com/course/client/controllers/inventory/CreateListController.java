@@ -27,6 +27,12 @@ public class CreateListController extends SceneController
             return;
         }
 
+        if (!containsOnlyAllowedCharacters(listName.getText()))
+        {
+            NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            return;
+        }
+
         InventoryObjectsList list = new InventoryObjectsList();
         list.setName(listName.getText());
         list.setArchived(false);
@@ -34,5 +40,11 @@ public class CreateListController extends SceneController
         modelContext.getRequestHandler().createList(list, modelContext.getCurrentUser().getId());
 
         goToSceneWithResource("Inventory/MainListsView.fxml");
+    }
+
+    private static boolean containsOnlyAllowedCharacters(String str)
+    {
+        String regex = "^[a-zA-Z0-9\\p{Punct} ]+$";
+        return str.matches(regex);
     }
 }

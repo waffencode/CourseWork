@@ -29,6 +29,12 @@ public class RegistrationController extends SceneController
             return;
         }
 
+        if (!containsOnlyAllowedCharacters(loginField.getText()))
+        {
+            NotificationDialog.showWarningDialog("Логин может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            return;
+        }
+
         User user = new User();
         user.setLogin(loginField.getText());
         String passwordHash = HashProvider.getStringHash(passwordField.getText());
@@ -43,5 +49,11 @@ public class RegistrationController extends SceneController
     private void onBackButtonClicked()
     {
         goToSceneWithResource("Auth/LoginView.fxml");
+    }
+
+    private static boolean containsOnlyAllowedCharacters(String str)
+    {
+        String regex = "^[a-zA-Z0-9\\p{Punct} ]+$";
+        return str.matches(regex);
     }
 }
