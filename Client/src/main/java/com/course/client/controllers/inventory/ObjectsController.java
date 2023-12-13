@@ -6,6 +6,7 @@ import com.course.client.service.UiContext;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -38,7 +39,6 @@ public class ObjectsController extends SceneController
 
     private void updateList()
     {
-
         UUID listId = modelContext.getCurrentListId();
         currentListLabel.setText("Список: " + listId.toString());
 
@@ -46,5 +46,11 @@ public class ObjectsController extends SceneController
         List<InventoryObject> list = modelContext.getRequestHandler().getAllObjectsFromList(listId, currentUserId);
         ObservableList<InventoryObject> inventoryObjectsLists = FXCollections.observableArrayList(list);
         listsView.setItems(inventoryObjectsLists);
+    }
+
+    @FXML
+    private void onAddButtonClicked()
+    {
+        goToSceneWithResource("Inventory/CreateObjectView.fxml");
     }
 }

@@ -2,15 +2,10 @@ package com.course.client.service;
 
 import com.course.client.domain.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,7 +97,7 @@ public class TcpRequestHandler
     public List<InventoryObject> getAllObjectsFromList(UUID listId, UUID by)
     {
         String path = "/inventory/object/view_list";
-        String query = "list_id=" +listId.toString() + "&by=" + by.toString();
+        String query = "list_id=" + listId.toString() + "&by=" + by.toString();
         String response = sendGet(path, query);
         String json = getJsonFromResponse(response);
 
