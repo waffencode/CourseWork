@@ -117,9 +117,14 @@ public class TcpRequestHandler
         sendPostWithQuery(path, query, data);
     }
 
-    public InventoryObjectsList getList(UUID id)
+    public InventoryObjectsList getList(UUID id, UUID by)
     {
-        return new InventoryObjectsList();
+        String path = "/inventory/list";
+        String query = "id=" + id.toString() + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+
+        return new JsonStream().readList(json);
     }
 
     public List<InventoryObjectsList> getAllLists(UUID by)
