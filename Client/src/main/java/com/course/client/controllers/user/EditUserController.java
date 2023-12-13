@@ -1,5 +1,7 @@
 package com.course.client.controllers.user;
 
-public class EditUserController
+import com.course.client.ui.SceneController;
+
+public class EditUserController extends SceneController
 {
 }

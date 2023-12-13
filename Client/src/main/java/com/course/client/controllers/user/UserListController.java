@@ -1,5 +1,7 @@
 package com.course.client.controllers.user;
 
-public class UserListController
+import com.course.client.ui.SceneController;
+
+public class UserListController extends SceneController
 {
 }

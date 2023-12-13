@@ -1,5 +1,7 @@
 package com.course.client.controllers.inventory;
 
-public class CreateObjectController
+import com.course.client.ui.SceneController;
+
+public class CreateObjectController extends SceneController
 {
 }

@@ -10,17 +10,6 @@ import java.util.List;
 public class JsonStream
 {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final BufferedReader reader;
-
-    public JsonStream()
-    {
-        reader = null;
-    }
-
-    public JsonStream(BufferedReader reader)
-    {
-        this.reader = reader;
-    }
 
     public String writeAsString(User user)
     {

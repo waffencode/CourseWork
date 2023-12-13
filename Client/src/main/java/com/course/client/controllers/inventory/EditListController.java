@@ -1,5 +1,7 @@
 package com.course.client.controllers.inventory;
 
-public class EditListController
+import com.course.client.ui.SceneController;
+
+public class EditListController extends SceneController
 {
 }
