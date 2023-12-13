@@ -3,10 +3,10 @@ package com.course.client.controllers.inventory;
 import com.course.client.domain.InventoryObjectsList;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
+import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -33,15 +33,45 @@ public class MainListController extends SceneController
     }
 
     @FXML
-    public void onViewButtonClicked()
+    private void onViewButtonClicked()
     {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать список для просмотра!");
+            return;
+        }
+
         UUID selectedListId = listsView.getSelectionModel().getSelectedItem().getId();
+
         if (selectedListId != null)
         {
             modelContext.setCurrentListId(selectedListId);
             goToSceneWithResource("Inventory/ObjectsInListView.fxml");
         }
+    }
 
+    @FXML
+    private void onEditButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать список для редактирования!");
+            return;
+        }
+
+        UUID selectedListId = listsView.getSelectionModel().getSelectedItem().getId();
+
+        if (selectedListId != null)
+        {
+            modelContext.setCurrentListId(selectedListId);
+            goToSceneWithResource("Inventory/EditListView.fxml");
+        }
+    }
+
+    @FXML
+    private void onCreateButtonClicked()
+    {
+        goToSceneWithResource("Inventory/CreateListView.fxml");
     }
 
     private void updateList()

@@ -105,7 +105,7 @@ public class TcpRequestHandler
         String query = "list_id=" +listId.toString() + "&by=" + by.toString();
         String response = sendGet(path, query);
         String json = getJsonFromResponse(response);
-        System.out.println(json);
+
         return new JsonStream().readObjectArray(json);
     }
 
@@ -135,7 +135,7 @@ public class TcpRequestHandler
         String query = "by=" + by.toString();
         String response = sendGet(path, query);
         String json = getJsonFromResponse(response);
-        System.out.println(json);
+
         return new JsonStream().readListArray(json);
     }
 

@@ -32,6 +32,7 @@ public class ObjectsController extends SceneController
     @FXML
     private void onBackButtonClicked()
     {
+        modelContext.setCurrentListId(null);
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 

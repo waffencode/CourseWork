@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.course.client.controllers.inventory.CreateListController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.CreateListController">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+    <Button fx:id="backButton" layoutX="411.0" layoutY="384.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
+    <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="CreateListView.fxml" />
 </AnchorPane>
+</VBox>
