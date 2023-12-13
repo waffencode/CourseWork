@@ -4,7 +4,6 @@ import com.course.client.domain.User;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import com.course.client.ui.SceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,18 +41,18 @@ public class MainMenuController extends SceneController
     @FXML
     private void onUsersButtonClicked()
     {
-
+        goToSceneWithResource("User/UserListView.fxml");
     }
 
     @FXML
     private void onInventoryButtonClicked()
     {
-
+        goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 
     @FXML
     private void onSettingsButtonClicked()
     {
-
+        goToSceneWithResource("Settings/SettingsView.fxml");
     }
 }

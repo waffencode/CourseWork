@@ -3,16 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="com.course.client.controllers.auth.LoginController" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Button fx:id="signInButton" layoutX="411.0" layoutY="384.0" mnemonicParsing="false" text="Вход" onAction="#onSignInButtonClicked"/>
-            <Button fx:id="signUpButton" layoutX="283.0" layoutY="384.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Регистрация" onAction="#onSignUpButtonClicked"/>
-            <PasswordField fx:id="passwordField" layoutX="283.0" layoutY="339.0" promptText="Пароль" />
-            <TextField fx:id="loginField" layoutX="283.0" layoutY="300.0" promptText="Логин" />
-             <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="Вход" />
-         </children>
-        </AnchorPane>
-    </children>
+<VBox fx:controller="com.course.client.controllers.auth.LoginController" prefHeight="600.0" prefWidth="800.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <Button fx:id="signInButton" layoutX="411.0" layoutY="384.0" mnemonicParsing="false" text="Вход"
+                onAction="#onSignInButtonClicked"/>
+        <Button fx:id="signUpButton" layoutX="283.0" layoutY="384.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="97.0" text="Регистрация" onAction="#onSignUpButtonClicked"/>
+        <PasswordField fx:id="passwordField" layoutX="283.0" layoutY="339.0" promptText="Пароль"/>
+        <TextField fx:id="loginField" layoutX="283.0" layoutY="300.0" promptText="Логин"/>
+        <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="Вход"/>
+    </AnchorPane>
 </VBox>
