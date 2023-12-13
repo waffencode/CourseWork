@@ -7,9 +7,21 @@ import java.util.UUID;
 
 public class ModelContext
 {
-    private TcpRequestHandler requestHandler = new TcpRequestHandler();
+    private TcpRequestHandler requestHandler;
     private InventoryApplication application;
     private User currentUser;
+
+    public Config getConfig()
+    {
+        return config;
+    }
+
+    public void setConfig(Config config)
+    {
+        this.config = config;
+    }
+
+    private Config config = new Config();
 
     private UUID currentListId = null;
     private String currentObjectId = null;
@@ -18,6 +30,7 @@ public class ModelContext
     public ModelContext(InventoryApplication application)
     {
         this.application = application;
+        requestHandler = new TcpRequestHandler(config);
     }
 
     public UUID getCurrentListId()

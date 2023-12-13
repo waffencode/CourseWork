@@ -11,8 +11,14 @@ import java.util.regex.Pattern;
 
 public class TcpRequestHandler
 {
-    private final String host = "localhost";
-    private final int port = 8080;
+    private String host;
+    private int port;
+
+    public TcpRequestHandler(Config config)
+    {
+        host = config.getHostname();
+        port = config.getPort();
+    }
 
     public void createUser(User user)
     {
