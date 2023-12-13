@@ -55,9 +55,12 @@ public class TcpRequestHandler
         return getUuidFromResponse(response);
     }
 
-    public void updateUser(User user)
+    public void updateUser(User user, UUID by)
     {
-
+        String path = "/inventory/user";
+        String query = "id=" + user.getId().toString() + "&by=" + by.toString();
+        String data = new JsonStream().writeAsString(user);
+        sendPut(path, query, data);
     }
 
     public void deleteUser(UUID id)
@@ -91,9 +94,12 @@ public class TcpRequestHandler
         return new JsonStream().readObjectArray(json);
     }
 
-    public void updateObject(InventoryObject object)
+    public void updateObject(InventoryObject object, UUID by)
     {
-
+        String path = "/inventory/object";
+        String query = "id=" + object.getInventoryNumber() + "&by=" + by.toString();
+        String data = new JsonStream().writeAsString(object);
+        sendPut(path, query, data);
     }
 
     public void deleteObject(String inventoryNumber, UUID by)
@@ -126,9 +132,12 @@ public class TcpRequestHandler
         return new JsonStream().readListArray(json);
     }
 
-    public void updateList(InventoryObjectsList list)
+    public void updateList(InventoryObjectsList list, UUID by)
     {
-
+        String path = "/inventory/list";
+        String query = "id=" + list.getId().toString() + "&by=" + by.toString();
+        String data = new JsonStream().writeAsString(list);
+        sendPut(path, query, data);
     }
 
     public void archiveList(UUID listId, UUID userId)
@@ -233,12 +242,38 @@ public class TcpRequestHandler
         }
     }
 
-//
-//    private String sendPut(String url)
-//    {
-//
-//    }
-//
+
+    private void sendPut(String path, String query, String body)
+    {
+        try (Socket socket = new Socket(host, port);
+             OutputStream outputStream = socket.getOutputStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
+        {
+            String request = "PUT " + path + "?" + query + " HTTP/1.1\r\n" +
+                    "Host: " + host + "\r\n" +
+                    "Content-Type: application/json\r\n" +
+                    "Content-Length: " + body.length() + "\r\n" +
+                    "Connection: close\r\n\r\n" +
+                    body;
+
+            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                response.append(line).append("\n");
+            }
+
+            String responseBody = response.toString();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     private String sendDelete(String path, String query)
     {
         try (Socket socket = new Socket(host, port);
