@@ -32,7 +32,10 @@ public class TcpRequestHandler
 
     public User getUserByLogin(String login)
     {
-        return new User();
+        String path = "/inventory/user";
+        String query = "login=" + login;
+        String response = sendGet(path, query);
+        return new JsonStream().readUser(getJsonFromResponse(response));
     }
 
     public List<User> getAllUsers()

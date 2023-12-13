@@ -1,7 +1,6 @@
 package com.course.server.endpoint;
 
 import com.course.server.ApplicationServiceProvider;
-import com.course.server.database.Database;
 import com.course.server.domain.Role;
 import com.course.server.domain.User;
 import com.course.server.service.JsonStream;
@@ -27,12 +26,10 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        UUID userId = UUID.fromString(req.getParameter("id"));
-        UUID issuedById = UUID.fromString(req.getParameter("by"));
-
-        if (applicationServiceProvider.authenticator.isValidUser(issuedById))
+        if (req.getParameter("id") == null && req.getParameter("login") != null)
         {
-            User user = applicationServiceProvider.database.getUser(userId);
+            String login = req.getParameter("login");
+            User user = applicationServiceProvider.database.getUserByLogin(login);
 
             resp.setContentType("application/json");
             PrintWriter printWriter = resp.getWriter();
@@ -40,12 +37,27 @@ public class UserServlet extends HttpServlet
             stream.write(user);
             printWriter.close();
         }
+        else
+        {
+            UUID userId = UUID.fromString(req.getParameter("id"));
+            UUID issuedById = UUID.fromString(req.getParameter("by"));
+
+            if (applicationServiceProvider.authenticator.isValidUser(issuedById))
+            {
+                User user = applicationServiceProvider.database.getUser(userId);
+
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.write(user);
+                printWriter.close();
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        System.out.println("POST USER:" + req.toString());
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
         User user = stream.readUser();

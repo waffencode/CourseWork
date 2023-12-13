@@ -23,8 +23,6 @@ public class UserLoginServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        System.out.println("GET USER:" + req.toString());
-
         String login = req.getParameter("login");
         String passwordHash = req.getParameter("password_hash");
 
