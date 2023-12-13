@@ -5,11 +5,13 @@
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.MainListController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
-    <Button layoutX="415.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
-    <Button layoutX="415.0" layoutY="274.0" mnemonicParsing="false" onAction="#onViewButtonClicked" text="Просмотр" />
-    <Button layoutX="415.0" layoutY="238.0" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать список" />
-    <Button layoutX="413.0" layoutY="200.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Создать список" />
+    <Button layoutX="421.0" layoutY="374.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Назад" />
+    <Button layoutX="423.0" layoutY="259.0" mnemonicParsing="false" onAction="#onViewButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Просмотр" />
+    <Button layoutX="421.0" layoutY="300.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Удалить" />
+    <Button layoutX="422.0" layoutY="337.0" mnemonicParsing="false" onAction="#onArchiveButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Архивировать" />
+    <Button layoutX="423.0" layoutY="223.0" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать список" />
+    <Button layoutX="421.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Создать список" />
     <Label layoutX="190.0" layoutY="14.0" prefHeight="26.0" prefWidth="294.0" text="MainListsView.fxml" />
-    <ListView fx:id="listsView" layoutX="190.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" />
+    <ListView fx:id="listsView" layoutX="74.0" layoutY="184.0" prefHeight="216.0" prefWidth="316.0" />
 </AnchorPane>
 </VBox>

@@ -109,6 +109,10 @@ public class ObjectsController extends SceneController
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для удаления!");
             return;
         }
+
+        String selectedObjectInventoryNumber = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
+        modelContext.getRequestHandler().deleteObject(selectedObjectInventoryNumber, modelContext.getCurrentUser().getId());
+        updateList();
     }
 
     @FXML

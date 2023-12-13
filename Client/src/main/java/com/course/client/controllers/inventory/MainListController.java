@@ -81,4 +81,45 @@ public class MainListController extends SceneController
         ObservableList<InventoryObjectsList> inventoryObjectsLists = FXCollections.observableArrayList(list);
         listsView.setItems(inventoryObjectsLists);
     }
+
+    @FXML
+    private void onDeleteButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать список для удаления!");
+            return;
+        }
+
+        UUID selectedListId = listsView.getSelectionModel().getSelectedItem().getId();
+        if (!modelContext.getRequestHandler().getAllObjectsFromList(selectedListId, modelContext.getCurrentUser().getId()).isEmpty())
+        {
+            NotificationDialog.showWarningDialog("Невозможно удалить список! В списке находятся объекты!");
+            return;
+        }
+
+        if (selectedListId != null)
+        {
+            modelContext.getRequestHandler().deleteList(selectedListId, modelContext.getCurrentUser().getId());
+            updateList();
+        }
+    }
+
+    @FXML
+    private void onArchiveButtonClicked()
+    {
+        if (listsView.getSelectionModel().getSelectedItem() == null)
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать список для архивации!");
+            return;
+        }
+
+        UUID selectedListId = listsView.getSelectionModel().getSelectedItem().getId();
+
+        if (selectedListId != null)
+        {
+            modelContext.getRequestHandler().archiveList(selectedListId, modelContext.getCurrentUser().getId());
+            updateList();
+        }
+    }
 }

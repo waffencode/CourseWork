@@ -96,9 +96,11 @@ public class TcpRequestHandler
 
     }
 
-    public void deleteObject(String inventoryNumber)
+    public void deleteObject(String inventoryNumber, UUID by)
     {
-
+        String path = "/inventory/object";
+        String query = "id=" + inventoryNumber.toString() + "&by=" + by.toString();
+        sendDelete(path, query);
     }
 
     public void createList(InventoryObjectsList list, UUID by)
@@ -131,7 +133,9 @@ public class TcpRequestHandler
 
     public void archiveList(UUID listId, UUID userId)
     {
-
+        String path = "/inventory/list/archive";
+        String query = "id=" + listId.toString() + "&action=0&by=" + userId;
+        sendGet(path, query);
     }
 
     public void restoreList(UUID listId)
@@ -139,9 +143,11 @@ public class TcpRequestHandler
 
     }
 
-    public void deleteList(UUID id)
+    public void deleteList(UUID id, UUID by)
     {
-
+        String path = "/inventory/list";
+        String query = "id=" + id.toString() + "&by=" + by.toString();
+        sendDelete(path, query);
     }
 
     private String sendGet(String path, String query)
@@ -233,10 +239,37 @@ public class TcpRequestHandler
 //
 //    }
 //
-//    private String sendDelete(String url)
-//    {
-//
-//    }
+    private String sendDelete(String path, String query)
+    {
+        try (Socket socket = new Socket(host, port);
+             OutputStream outputStream = socket.getOutputStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
+        {
+            String request = "DELETE " + path + "?" + query + " HTTP/1.1\r\n" +
+                    "Host: " + host + "\r\n" +
+                    "Connection: close\r\n\r\n";
+
+            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                response.append(line).append("\n");
+            }
+
+            String responseBody = response.toString();
+
+            return responseBody;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     private UUID getUuidFromResponse(String string)
     {
         String regex = "\\b[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}\\b";
