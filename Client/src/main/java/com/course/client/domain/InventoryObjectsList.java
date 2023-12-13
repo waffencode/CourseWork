@@ -7,9 +7,9 @@ public class InventoryObjectsList
 {
     private UUID id = UUID.randomUUID();
     private String name;
-    private Boolean isArchived;
+    private Boolean isArchived = false;
     private UUID createdById;
-    private Timestamp creationDate;
+    private Timestamp creationDate = new Timestamp(System.currentTimeMillis());
     private UUID archivedBy;
     private Timestamp archivationDate;
 

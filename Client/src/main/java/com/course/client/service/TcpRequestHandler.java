@@ -24,7 +24,7 @@ public class TcpRequestHandler
         String path = "/inventory/user";
         String query = "by=" + user.getId().toString();
         String data = new JsonStream().writeAsString(user);
-        sendPost(path, query, data);
+        sendPostWithQuery(path, query, data);
     }
 
     public User getUser(UUID id, UUID by)
@@ -119,9 +119,12 @@ public class TcpRequestHandler
 
     }
 
-    public void createList(InventoryObjectsList list)
+    public void createList(InventoryObjectsList list, UUID by)
     {
-
+        String path = "/inventory/list";
+        String query = "by=" + by.toString();
+        String data = new JsonStream().writeAsString(list);
+        sendPostWithQuery(path, query, data);
     }
 
     public InventoryObjectsList getList(UUID id)
@@ -190,7 +193,7 @@ public class TcpRequestHandler
         return null;
     }
 
-    private void sendPost(String path, String query, String body)
+    private void sendPost(String path, String body)
     {
         try (Socket socket = new Socket(host, port);
              OutputStream outputStream = socket.getOutputStream();
@@ -204,15 +207,37 @@ public class TcpRequestHandler
                     body;
 
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
-//            StringBuilder response = new StringBuilder();
-//            String line;
-//
-//            while ((line = reader.readLine()) != null)
-//            {
-//                response.append(line).append("\n");
-//            }
-//
-//            String responseBody = response.toString();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendPostWithQuery(String path, String query, String body)
+    {
+        try (Socket socket = new Socket(host, port);
+             OutputStream outputStream = socket.getOutputStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
+        {
+            String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" +
+                    "Host: " + host + "\r\n" +
+                    "Content-Type: application/json\r\n" +
+                    "Content-Length: " + body.length() + "\r\n" +
+                    "Connection: close\r\n\r\n" +
+                    body;
+
+            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                response.append(line).append("\n");
+            }
+
+            String responseBody = response.toString();
         }
         catch (IOException e)
         {
