@@ -1,7 +1,6 @@
 package com.course.server.endpoint;
 
 import com.course.server.ApplicationServiceProvider;
-import com.course.server.database.Database;
 import com.course.server.domain.InventoryObjectsList;
 import com.course.server.domain.Role;
 import com.course.server.service.JsonStream;
@@ -38,7 +37,7 @@ public class ListServlet extends HttpServlet
                 resp.setContentType("application/json");
                 PrintWriter printWriter = resp.getWriter();
                 JsonStream stream = new JsonStream(printWriter);
-                stream.writeList(list);
+                stream.writeObjectsList(list);
                 printWriter.close();
             }
             else

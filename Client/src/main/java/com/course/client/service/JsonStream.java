@@ -88,6 +88,21 @@ public class JsonStream
         return user;
     }
 
+    public List<User> readUserArray(String json)
+    {
+        List<User> list = new ArrayList<>();
+
+        try
+        {
+            list = objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, User.class));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     public InventoryObjectsList readList(String json)
     {
         InventoryObjectsList list = new InventoryObjectsList();

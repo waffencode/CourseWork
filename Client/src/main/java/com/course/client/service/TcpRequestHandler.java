@@ -38,9 +38,12 @@ public class TcpRequestHandler
         return new JsonStream().readUser(getJsonFromResponse(response));
     }
 
-    public List<User> getAllUsers()
+    public List<User> getAllUsers(UUID by)
     {
-        return new ArrayList<User>();
+        String path = "/inventory/user";
+        String query = "by=" + by.toString();
+        String response = sendGet(path, query);
+        return new JsonStream().readUserArray(getJsonFromResponse(response));
     }
 
     public UUID tryAuthorizeLoginData(String login, String passwordHash)
@@ -50,31 +53,6 @@ public class TcpRequestHandler
         String response = sendGet(path, query);
 
         return getUuidFromResponse(response);
-    }
-
-    private UUID getUuidFromResponse(String string)
-    {
-        String regex = "\\b[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}\\b";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(string);
-
-        if (matcher.find())
-        {
-            String match = matcher.group();
-
-            if (match != null)
-            {
-                return UUID.fromString(matcher.group());
-            }
-        }
-
-        return null;
-    }
-
-    private String getJsonFromResponse(String response)
-    {
-        String[] parts = response.split("\n\n");
-        return parts[1];
     }
 
     public void updateUser(User user)
@@ -248,6 +226,7 @@ public class TcpRequestHandler
             e.printStackTrace();
         }
     }
+
 //
 //    private String sendPut(String url)
 //    {
@@ -258,4 +237,28 @@ public class TcpRequestHandler
 //    {
 //
 //    }
+    private UUID getUuidFromResponse(String string)
+    {
+        String regex = "\\b[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+
+        if (matcher.find())
+        {
+            String match = matcher.group();
+
+            if (match != null)
+            {
+                return UUID.fromString(matcher.group());
+            }
+        }
+
+        return null;
+    }
+
+    private String getJsonFromResponse(String response)
+    {
+        String[] parts = response.split("\n\n");
+        return parts[1];
+    }
 }

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 public class UserServlet extends HttpServlet
@@ -37,7 +38,7 @@ public class UserServlet extends HttpServlet
             stream.write(user);
             printWriter.close();
         }
-        else
+        else if (req.getParameter("id") != null && req.getParameter("login") == null)
         {
             UUID userId = UUID.fromString(req.getParameter("id"));
             UUID issuedById = UUID.fromString(req.getParameter("by"));
@@ -50,6 +51,22 @@ public class UserServlet extends HttpServlet
                 PrintWriter printWriter = resp.getWriter();
                 JsonStream stream = new JsonStream(printWriter);
                 stream.write(user);
+                printWriter.close();
+            }
+        }
+        else
+        {
+            UUID issuedById = UUID.fromString(req.getParameter("by"));
+
+            if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
+                    applicationServiceProvider.database.getUser(issuedById).getRole().compareTo(Role.ADMINISTRATOR) >= 0)
+            {
+                List<User> users = applicationServiceProvider.database.getAllUsers();
+
+                resp.setContentType("application/json");
+                PrintWriter printWriter = resp.getWriter();
+                JsonStream stream = new JsonStream(printWriter);
+                stream.writeUserList(users);
                 printWriter.close();
             }
         }

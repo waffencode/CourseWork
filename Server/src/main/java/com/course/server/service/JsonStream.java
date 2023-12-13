@@ -38,6 +38,19 @@ public class JsonStream
         }
     }
 
+    public void writeUserList(List<User> users)
+    {
+        try
+        {
+            objectMapper.writerFor(new TypeReference<List<User>>()
+            {
+            }).writeValue(writer, users);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void write(InventoryObjectsList list)
     {
         try
@@ -51,7 +64,7 @@ public class JsonStream
         }
     }
 
-    public void writeList(List<InventoryObjectsList> lists)
+    public void writeObjectsList(List<InventoryObjectsList> lists)
     {
         try
         {
