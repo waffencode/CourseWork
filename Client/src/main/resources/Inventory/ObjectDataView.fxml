@@ -9,8 +9,7 @@
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.ObjectViewController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
     <Button fx:id="backButton" layoutX="305.0" layoutY="287.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
-    <Button fx:id="applyButton" layoutX="375.0" layoutY="287.0" mnemonicParsing="false" onAction="#onApplyButtonClicked" text="Применить" />
-    <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="EditObjectView.fxml" />
+    <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="ObjectDataView.fxml" />
     <Label fx:id="currentObjectLabel" layoutX="182.0" layoutY="53.0" prefHeight="45.0" prefWidth="294.0" text="Объект: " />
     <TextField fx:id="nameField" layoutX="304.0" layoutY="162.0" promptText="Имя объекта" />
     <ChoiceBox fx:id="selectCategoryChoice" layoutX="304.0" layoutY="199.0" prefWidth="150.0" />

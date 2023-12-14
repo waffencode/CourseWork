@@ -587,7 +587,6 @@ public class Database
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE inventory_number LIKE '%" + number + "%';"))
         {
-//            statement.setString(1, number);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
@@ -626,7 +625,6 @@ public class Database
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE name LIKE '%" + name + "%';"))
         {
-//            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
