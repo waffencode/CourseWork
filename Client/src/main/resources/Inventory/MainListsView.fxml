@@ -10,7 +10,8 @@
     <Button layoutX="421.0" layoutY="300.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Удалить" />
     <Button layoutX="422.0" layoutY="337.0" mnemonicParsing="false" onAction="#onArchiveButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Архивировать" />
     <Button layoutX="423.0" layoutY="223.0" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать список" />
-    <Button layoutX="580.0" layoutY="185.0" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="102.0" text="Поиск" />
+    <Button layoutX="580.0" layoutY="185.0" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="132.0" text="Поиск" />
+    <Button layoutX="580.0" layoutY="222.0" mnemonicParsing="false" onAction="#onMergeButtonClicked" prefHeight="26.0" prefWidth="132.0" text="Объединить списки" />
     <Button layoutX="421.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Создать список" />
     <Label layoutX="190.0" layoutY="14.0" prefHeight="26.0" prefWidth="294.0" text="MainListsView.fxml" />
     <ListView fx:id="listsView" layoutX="74.0" layoutY="184.0" prefHeight="216.0" prefWidth="316.0" />

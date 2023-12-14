@@ -89,6 +89,12 @@ public class MainListController extends SceneController
     }
 
     @FXML
+    private void onMergeButtonClicked()
+    {
+        goToSceneWithResource("Inventory/MergeListView.fxml");
+    }
+
+    @FXML
     private void onDeleteButtonClicked()
     {
         if (listsView.getSelectionModel().getSelectedItem() == null)
