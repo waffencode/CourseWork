@@ -7,7 +7,6 @@
     <AnchorPane VBox.vgrow="ALWAYS">
         <Button fx:id="usersMenuButton" layoutX="293.0" layoutY="247.0" mnemonicParsing="false" onAction="#onUsersButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Пользователи" />
         <Button fx:id="inventoryMenuButton" layoutX="294.0" layoutY="210.0" mnemonicParsing="false" onAction="#onInventoryButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Инвентарь" />
-        <Button fx:id="settingsMenuButton" layoutX="294.0" layoutY="286.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Настройки" />
         <Button layoutX="293.0" layoutY="331.0" mnemonicParsing="false" onAction="#onImportButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Импорт данных" />
         <Button layoutX="294.0" layoutY="370.0" mnemonicParsing="false" onAction="#onExportButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Экспорт данных" />
         <Button fx:id="logoutButton" layoutX="294.0" layoutY="411.0" mnemonicParsing="false" onAction="#onLogoutButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Выход из аккаунта" />

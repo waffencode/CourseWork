@@ -52,12 +52,6 @@ public class MainMenuController extends SceneController
     }
 
     @FXML
-    private void onSettingsButtonClicked()
-    {
-        goToSceneWithResource("Settings/SettingsView.fxml");
-    }
-
-    @FXML
     private void onLogoutButtonClicked()
     {
         modelContext.setCurrentUser(null);
