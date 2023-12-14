@@ -27,6 +27,8 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("GET at List with: " + req.toString());
+
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById))
@@ -58,6 +60,8 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("POST at List with: " + req.toString());
+
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
@@ -73,6 +77,8 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("PUT at List with: " + req.toString());
+
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
@@ -93,6 +99,8 @@ public class ListServlet extends HttpServlet
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("DELETE at List with: " + req.toString());
+
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&

@@ -22,6 +22,8 @@ public class UserLoginServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("GET at UserLogin with: " + req.toString());
+
         String login = req.getParameter("login");
         String passwordHash = req.getParameter("password_hash");
 

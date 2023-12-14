@@ -26,6 +26,8 @@ public class ObjectViewListServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("GET at ObjectView with: " + req.toString());
+
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById))
