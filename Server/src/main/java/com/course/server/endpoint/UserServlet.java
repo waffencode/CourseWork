@@ -108,7 +108,7 @@ public class UserServlet extends HttpServlet
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
         if (applicationServiceProvider.authenticator.isValidUser(issuedById) &&
-                applicationServiceProvider.database.getUser(userId).getRole().compareTo(Role.ADMINISTRATOR) >= 0)
+                applicationServiceProvider.database.getUser(issuedById).getRole().compareTo(Role.ADMINISTRATOR) >= 0)
         {
             applicationServiceProvider.database.deleteUser(userId);
         }
