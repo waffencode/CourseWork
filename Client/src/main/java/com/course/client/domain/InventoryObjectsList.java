@@ -86,6 +86,6 @@ public class InventoryObjectsList
     @Override
     public String toString()
     {
-        return name + (isArchived ? " (Архивирован)" : "");
+        return name + (isArchived ? " (Архивирован)" : "") + " (ID: " + id.toString() + ")";
     }
 }
