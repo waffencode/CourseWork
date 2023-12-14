@@ -42,12 +42,14 @@ public class EditListController extends SceneController
         if (listNameField.getText().isBlank())
         {
             NotificationDialog.showInformationDialog("Введите имя списка!");
+            modelContext.getLogger().error("List edit error");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(listNameField.getText()))
         {
             NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("List edit error");
             return;
         }
 
@@ -56,6 +58,7 @@ public class EditListController extends SceneController
         list.setName(listNameField.getText());
         modelContext.getRequestHandler().updateList(list, modelContext.getCurrentUser().getId());
         NotificationDialog.showInformationDialog("Список успешно изменён!");
+        modelContext.getLogger().info("List edit success");
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 

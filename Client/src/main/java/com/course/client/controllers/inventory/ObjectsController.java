@@ -62,6 +62,7 @@ public class ObjectsController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для просмотра!");
+            modelContext.getLogger().error("View attempt with empty selection!");
             return;
         }
 
@@ -80,6 +81,7 @@ public class ObjectsController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для редактирования!");
+            modelContext.getLogger().error("Edit attempt with empty selection!");
             return;
         }
 
@@ -98,6 +100,7 @@ public class ObjectsController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для списания!");
+            modelContext.getLogger().error("Decommission attempt with empty selection!");
             return;
         }
 
@@ -110,6 +113,7 @@ public class ObjectsController extends SceneController
             object.setDecommissionedById(modelContext.getCurrentUser().getId());
             object.setDecommissionDate(new Timestamp(System.currentTimeMillis()));
             modelContext.getRequestHandler().updateObject(object, modelContext.getCurrentUser().getId());
+            modelContext.getLogger().info("Object " + object.getInventoryNumber() + " decommissioned");
         }
     }
 
@@ -119,11 +123,13 @@ public class ObjectsController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для удаления!");
+            modelContext.getLogger().error("Delete attempt with empty selection!");
             return;
         }
 
         String selectedObjectInventoryNumber = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
         modelContext.getRequestHandler().deleteObject(selectedObjectInventoryNumber, modelContext.getCurrentUser().getId());
+        modelContext.getLogger().info("Object " + selectedObjectInventoryNumber + " deleted");
         updateList();
     }
 
@@ -133,6 +139,7 @@ public class ObjectsController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для изменения списка!");
+            modelContext.getLogger().error("Edit attempt with empty selection!");
             return;
         }
 

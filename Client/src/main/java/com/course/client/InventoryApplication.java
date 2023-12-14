@@ -14,6 +14,7 @@ public class InventoryApplication extends Application
     {
         ModelContext modelContext = new ModelContext(this);
         UiContext uiContext = new UiContext(stage);
+        modelContext.getLogger().info("Application startup");
         stage.setScene(new SceneProvider().getPreparedScene("Auth/LoginView.fxml", modelContext, uiContext));
         stage.show();
     }

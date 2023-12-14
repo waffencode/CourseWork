@@ -38,6 +38,7 @@ public class MainListController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать список для просмотра!");
+            modelContext.getLogger().error("List view attempt with empty selection!");
             return;
         }
 
@@ -56,6 +57,7 @@ public class MainListController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать список для редактирования!");
+            modelContext.getLogger().error("List edit attempt with empty selection!");
             return;
         }
 
@@ -100,6 +102,7 @@ public class MainListController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать список для удаления!");
+            modelContext.getLogger().error("List delete attempt with empty selection!");
             return;
         }
 
@@ -114,6 +117,7 @@ public class MainListController extends SceneController
         {
             modelContext.getRequestHandler().deleteList(selectedListId, modelContext.getCurrentUser().getId());
             NotificationDialog.showInformationDialog("Список удалён!");
+            modelContext.getLogger().info("List " + selectedListId + " deleted");
             updateList();
         }
     }
@@ -124,6 +128,7 @@ public class MainListController extends SceneController
         if (listsView.getSelectionModel().getSelectedItem() == null)
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать список для архивации!");
+            modelContext.getLogger().error("List archivation attempt with empty selection!");
             return;
         }
 
@@ -133,6 +138,7 @@ public class MainListController extends SceneController
         {
             modelContext.getRequestHandler().archiveList(selectedListId, modelContext.getCurrentUser().getId());
             NotificationDialog.showInformationDialog("Список архивирован!");
+            modelContext.getLogger().info("List " + selectedListId + " archived");
             updateList();
         }
     }

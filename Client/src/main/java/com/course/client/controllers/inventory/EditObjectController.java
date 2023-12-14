@@ -63,12 +63,14 @@ public class EditObjectController extends SceneController
         if (nameField.getText().isBlank() || selectCategoryChoice.getValue() == null)
         {
             NotificationDialog.showInformationDialog("Заполните все требуемые поля!");
+            modelContext.getLogger().error("Object edit error");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(nameField.getText()))
         {
             NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("Object edit error");
             return;
         }
 
@@ -81,6 +83,7 @@ public class EditObjectController extends SceneController
 
         modelContext.setCurrentObjectId(null);
         NotificationDialog.showInformationDialog("Объект успешно изменён!");
+        modelContext.getLogger().info("Object edit success");
         goToSceneWithResource("Inventory/ObjectsInListView.fxml");
     }
 

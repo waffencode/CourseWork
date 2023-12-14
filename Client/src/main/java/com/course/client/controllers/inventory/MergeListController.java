@@ -55,12 +55,14 @@ public class MergeListController extends SceneController
         if (target == null || aux == null || newListName.getText().isBlank())
         {
             NotificationDialog.showWarningDialog("Выберите списки для объединения и введите название нового списка!");
+            modelContext.getLogger().error("List merge error");
             return;
         }
 
         if (target.getId() == aux.getId())
         {
             NotificationDialog.showWarningDialog("Невозможно объединить одинаковые списки!");
+            modelContext.getLogger().error("List merge error");
             return;
         }
 
@@ -78,6 +80,7 @@ public class MergeListController extends SceneController
         modelContext.getRequestHandler().deleteList(aux.getId(), modelContext.getCurrentUser().getId());
 
         NotificationDialog.showInformationDialog("Списки успешно объединены!");
+        modelContext.getLogger().info("List merge success");
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 

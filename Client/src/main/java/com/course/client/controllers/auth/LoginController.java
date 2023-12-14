@@ -21,8 +21,11 @@ public class LoginController extends SceneController
     @FXML
     private void onSignInButtonClicked()
     {
+        modelContext.getLogger().info("SignIn attempt");
+
         if (loginField.getText().isBlank() || passwordField.getText().isBlank())
         {
+            modelContext.getLogger().error("SignIn attempt with invalid data");
             NotificationDialog.showInformationDialog("Введите имя пользователя и пароль!");
             return;
         }
@@ -35,11 +38,13 @@ public class LoginController extends SceneController
 
         if (authorizedUserId != null)
         {
+            modelContext.getLogger().info("SignIn success");
             modelContext.setCurrentUser(modelContext.getRequestHandler().getUser(authorizedUserId, authorizedUserId));
             goToSceneWithResource("Main/MainMenuView.fxml");
         }
         else
         {
+            modelContext.getLogger().error("SignIn attempt failed: invalid login or password");
             NotificationDialog.showWarningDialog("Неверное имя пользователя или пароль!");
         }
     }

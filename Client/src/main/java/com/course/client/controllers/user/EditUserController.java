@@ -61,12 +61,14 @@ public class EditUserController extends SceneController
         if (userLoginField.getText().isBlank() || selectRoleChoice.getValue() == null)
         {
             NotificationDialog.showInformationDialog("Заполните требуемые поля!");
+            modelContext.getLogger().error("User edit error");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(userLoginField.getText()))
         {
             NotificationDialog.showWarningDialog("Логин может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("User edit error");
             return;
         }
 
@@ -80,6 +82,7 @@ public class EditUserController extends SceneController
 
         modelContext.setCurrentUserOnEditId(null);
         NotificationDialog.showInformationDialog("Данные пользователя успешно изменены!");
+        modelContext.getLogger().info("User " + user.getId() + " edit success");
         goToSceneWithResource("User/UserListView.fxml");
     }
 

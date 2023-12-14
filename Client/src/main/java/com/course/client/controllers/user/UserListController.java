@@ -71,6 +71,7 @@ public class UserListController extends SceneController
 
         if (selectedUserId != null)
         {
+            modelContext.getLogger().info("User " + selectedUserId + " deleted");
             modelContext.getRequestHandler().deleteUser(selectedUserId, modelContext.getCurrentUser().getId());
             updateList();
         }

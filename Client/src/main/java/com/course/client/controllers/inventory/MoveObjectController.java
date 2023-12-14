@@ -63,11 +63,13 @@ public class MoveObjectController extends SceneController
             modelContext.setCurrentObjectId(null);
 
             NotificationDialog.showInformationDialog("Список объекта успешно изменён!");
+            modelContext.getLogger().info("Object " + objectId + " list changed to " + list.getId());
             goToSceneWithResource("Inventory/ObjectsInListView.fxml");
         }
         else
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать список для перемещения объекта!");
+            modelContext.getLogger().error("Object list change error");
         }
     }
 }

@@ -17,21 +17,26 @@ public class RegistrationController extends SceneController
     @FXML
     private void onRegisterButtonClicked()
     {
+        modelContext.getLogger().info("Registration attempt");
+
         if (loginField.getText().isBlank() || passwordField.getText().isBlank())
         {
             NotificationDialog.showInformationDialog("Введите имя пользователя и пароль!");
+            modelContext.getLogger().error("Registration attempt with invalid data");
             return;
         }
 
         if (modelContext.getRequestHandler().getUserByLogin(loginField.getText()) != null)
         {
             NotificationDialog.showWarningDialog("Пользователь с таким логином уже существует!");
+            modelContext.getLogger().error("Registration attempt with invalid data");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(loginField.getText()))
         {
             NotificationDialog.showWarningDialog("Логин может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("Registration attempt with invalid data");
             return;
         }
 
@@ -42,6 +47,7 @@ public class RegistrationController extends SceneController
         user.setRole(Role.USER);
         modelContext.getRequestHandler().createUser(user);
 
+        modelContext.getLogger().info("Registration success");
         NotificationDialog.showInformationDialog("Аккаунт успешно создан!");
         goToSceneWithResource("Auth/LoginView.fxml");
     }

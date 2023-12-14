@@ -2,6 +2,8 @@ package com.course.client.service;
 
 import com.course.client.InventoryApplication;
 import com.course.client.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.UUID;
 
@@ -10,6 +12,13 @@ public class ModelContext
     private TcpRequestHandler requestHandler;
     private InventoryApplication application;
     private User currentUser;
+
+    public Logger getLogger()
+    {
+        return logger;
+    }
+
+    private Logger logger = LogManager.getLogger(ModelContext.class);
 
     public Config getConfig()
     {

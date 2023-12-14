@@ -24,12 +24,14 @@ public class CreateListController extends SceneController
         if (listName.getText().isBlank())
         {
             NotificationDialog.showInformationDialog("Введите имя списка!");
+            modelContext.getLogger().error("List creation error");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(listName.getText()))
         {
             NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("List creation error");
             return;
         }
 
@@ -40,6 +42,7 @@ public class CreateListController extends SceneController
         modelContext.getRequestHandler().createList(list, modelContext.getCurrentUser().getId());
 
         NotificationDialog.showInformationDialog("Список успешно создан!");
+        modelContext.getLogger().info("List creation success");
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 

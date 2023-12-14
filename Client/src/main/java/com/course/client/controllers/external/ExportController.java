@@ -6,6 +6,7 @@ import com.course.client.service.CsvFile;
 import com.course.client.service.JsonFile;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
+import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -93,6 +94,8 @@ public class ExportController extends SceneController
             }
         }
 
+        NotificationDialog.showInformationDialog("Экспорт произведён успешно!");
+        modelContext.getLogger().info("Export success");
         goToSceneWithResource("Main/MainMenuView.fxml");
     }
 

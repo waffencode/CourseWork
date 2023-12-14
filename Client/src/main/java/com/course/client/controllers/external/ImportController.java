@@ -25,6 +25,8 @@ public class ImportController extends SceneController
     @FXML
     private void onImportButtonClicked()
     {
+        modelContext.getLogger().info("Import attempt");
+
         FileChooser chooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         chooser.getExtensionFilters().add(extFilter);
@@ -44,6 +46,7 @@ public class ImportController extends SceneController
                     if (listObject.getInventoryNumber().equals(databaseObject.getInventoryNumber()))
                     {
                         NotificationDialog.showErrorDialog("В импортируемом списке есть объекты с номерами, уже содержащимися в БД!");
+                        modelContext.getLogger().error("Import error: duplicate entry");
                         return;
                     }
                 }
@@ -56,6 +59,7 @@ public class ImportController extends SceneController
                     if (listObject.getListId().equals(databaseObject.getId()))
                     {
                         NotificationDialog.showErrorDialog("В импортируемом списке есть списки с ID, уже содержащимися в БД!");
+                        modelContext.getLogger().error("Import error: duplicate entry");
                         return;
                     }
                 }
@@ -82,6 +86,7 @@ public class ImportController extends SceneController
             }
 
             NotificationDialog.showInformationDialog("Успешный импорт!");
+            modelContext.getLogger().info("Import success");
         }
 
         goToSceneWithResource("Main/MainMenuView.fxml");

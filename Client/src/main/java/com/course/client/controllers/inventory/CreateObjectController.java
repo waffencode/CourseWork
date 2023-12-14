@@ -44,24 +44,28 @@ public class CreateObjectController extends SceneController
         if (inventoryNumberField.getText().isBlank() || nameField.getText().isBlank() || selectCategoryChoice.getValue() == null)
         {
             NotificationDialog.showInformationDialog("Заполните все требуемые поля!");
+            modelContext.getLogger().error("Object creation error");
             return;
         }
 
         if (!containsOnlyDigits(inventoryNumberField.getText()) || inventoryNumberField.getText().length() > 15)
         {
             NotificationDialog.showWarningDialog("Инвентарный номер должен содержать только цифры и иметь длину не более 15 цифр!");
+            modelContext.getLogger().error("Object creation error");
             return;
         }
 
         if (modelContext.getRequestHandler().getObject(inventoryNumberField.getText(), modelContext.getCurrentUser().getId()) != null)
         {
             NotificationDialog.showWarningDialog("Объект с таким инвентарным номером уже существует!");
+            modelContext.getLogger().error("Object creation error");
             return;
         }
 
         if (!containsOnlyAllowedCharacters(nameField.getText()))
         {
             NotificationDialog.showWarningDialog("Имя может содержать только символы латинского алфавита, цифры и знаки препинания!");
+            modelContext.getLogger().error("Object creation error");
             return;
         }
 
@@ -76,6 +80,7 @@ public class CreateObjectController extends SceneController
         modelContext.getRequestHandler().createObject(object, modelContext.getCurrentUser().getId());
 
         NotificationDialog.showInformationDialog("Объект успешно создан!");
+        modelContext.getLogger().info("Object creation success");
         goToSceneWithResource("Inventory/ObjectsInListView.fxml");
     }
 
