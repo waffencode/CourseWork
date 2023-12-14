@@ -2,12 +2,16 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.user.EditUserController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
     <Button fx:id="backButton" layoutX="192.0" layoutY="287.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
     <Button fx:id="applyButton" layoutX="262.0" layoutY="287.0" mnemonicParsing="false" onAction="#onApplyButtonClicked" text="Применить" />
-    <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="EditUserView.fxml" />
+    <Label layoutX="182.0" layoutY="14.0" prefHeight="46.0" prefWidth="493.0" text="Редактирование пользователя">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
     <Label fx:id="currentUserLabel" layoutX="182.0" layoutY="53.0" prefHeight="45.0" prefWidth="294.0" text="Пользователь: " />
     <TextField fx:id="userLoginField" layoutX="192.0" layoutY="197.0" />
     <ChoiceBox fx:id="selectRoleChoice" layoutX="191.0" layoutY="237.0" prefWidth="150.0" />

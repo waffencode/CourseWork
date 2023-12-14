@@ -2,12 +2,16 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.external.ExportController">
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
         <Button layoutX="414.0" layoutY="316.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
         <Button layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#onExportButtonClicked" prefHeight="26.0" prefWidth="88.0" text="Экспорт" />
-        <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="ExportView.fxml" />
+        <Label layoutX="70.0" layoutY="51.0" prefHeight="45.0" prefWidth="294.0" text="Экспорт данных">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
         <ListView fx:id="listsView" layoutX="70.0" layoutY="126.0" prefHeight="216.0" prefWidth="316.0" />
         <Label layoutX="414.0" layoutY="126.0" text="Для экспорта выберите формат и требуемый список." />
         <Label layoutX="414.0" layoutY="151.0" text="Если список не выбран, будет произведён экспорт всей БД." />

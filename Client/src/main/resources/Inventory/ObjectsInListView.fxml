@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.ObjectsController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -12,7 +13,10 @@
     <Button layoutX="404.0" layoutY="312.0" mnemonicParsing="false" onAction="#onDecommissionButtonClicked" prefHeight="26.0" prefWidth="110.0" text="Списать" />
     <Button layoutX="524.0" layoutY="200.0" mnemonicParsing="false" onAction="#onMoveButtonClicked" prefHeight="26.0" prefWidth="147.0" text="Изменить список" />
     <Button layoutX="404.0" layoutY="348.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="26.0" prefWidth="110.0" text="Удалить" />
-    <Label layoutX="190.0" layoutY="71.0" prefHeight="45.0" prefWidth="294.0" text="ObjectsInListView.fxml" />
+    <Label layoutX="190.0" layoutY="71.0" prefHeight="45.0" prefWidth="294.0" text="Просмотр списка">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
     <Label fx:id="currentListLabel" layoutX="190.0" layoutY="117.0" prefHeight="45.0" prefWidth="294.0" text="Список: " />
     <ListView fx:id="listsView" layoutX="190.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" />
 </AnchorPane>

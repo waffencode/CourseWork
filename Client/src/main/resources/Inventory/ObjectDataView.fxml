@@ -2,14 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.ObjectViewController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
     <Button fx:id="backButton" layoutX="97.0" layoutY="412.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
-    <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="ObjectDataView.fxml" />
+    <Label layoutX="97.0" layoutY="21.0" prefHeight="46.0" prefWidth="510.0" text="Просмотр данных объекта">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
 
     <Label layoutX="100.0" layoutY="77.0" text="Инвентарный номер:" />
-    <Label fx:id="inventoryNumber" layoutX="312.0" layoutY="79.0"/>
+    <Label fx:id="inventoryNumber" layoutX="312.0" layoutY="79.0" />
 
     <Label layoutX="100.0" layoutY="102.0" text="Имя объекта:" />
     <Label fx:id="name" layoutX="312.0" layoutY="104.0" />
@@ -27,13 +31,13 @@
     <Label fx:id="listId" layoutX="312.0" layoutY="252.0" />
 
     <Label layoutX="100.0" layoutY="280.0" text="Добавлен пользователем:" />
-    <Label fx:id="addedById" layoutX="312.0" layoutY="282.0"/>
+    <Label fx:id="addedById" layoutX="312.0" layoutY="282.0" />
 
     <Label layoutX="100.0" layoutY="310.0" text="Дата добавления:" />
     <Label fx:id="additionDate" layoutX="312.0" layoutY="312.0" />
 
     <Label layoutX="100.0" layoutY="340.0" text="Списан пользователем:" />
-    <Label fx:id="decommissionedById" layoutX="312.0" layoutY="342.0"/>
+    <Label fx:id="decommissionedById" layoutX="312.0" layoutY="342.0" />
 
     <Label layoutX="100.0" layoutY="370.0" text="Дата списания:" />
     <Label fx:id="decommissionDate" layoutX="312.0" layoutY="372.0" />

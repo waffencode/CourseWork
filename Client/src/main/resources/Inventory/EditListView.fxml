@@ -2,12 +2,16 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.EditListController">
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
         <Button layoutX="182.0" layoutY="338.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
         <Button layoutX="250.0" layoutY="338.0" mnemonicParsing="false" onAction="#onApplyButtonClicked" text="Применить" />
-        <Label layoutX="182.0" layoutY="14.0" prefHeight="45.0" prefWidth="294.0" text="EditListView.fxml" />
+        <Label layoutX="182.0" layoutY="14.0" prefHeight="46.0" prefWidth="430.0" text="Редактирование списка">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
       <Label fx:id="listIdLabel" layoutX="182.0" layoutY="51.0" prefHeight="38.0" prefWidth="262.0" text="Список:" />
       <TextField fx:id="listNameField" layoutX="182.0" layoutY="236.0" />
       <Label layoutX="111.0" layoutY="235.0" prefHeight="26.0" prefWidth="64.0" text="Имя списка" />

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.main.MainMenuController">
     <AnchorPane VBox.vgrow="ALWAYS">
@@ -11,8 +12,10 @@
         <Button layoutX="294.0" layoutY="370.0" mnemonicParsing="false" onAction="#onExportButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Экспорт данных" />
         <Button fx:id="logoutButton" layoutX="294.0" layoutY="411.0" mnemonicParsing="false" onAction="#onLogoutButtonClicked" prefHeight="26.0" prefWidth="186.0" text="Выход из аккаунта" />
         <Button fx:id="exitButton" layoutX="294.0" layoutY="446.0" mnemonicParsing="false" onAction="#onExitButtonClicked" prefHeight="26.0" prefWidth="185.0" text="Выход из приложения" />
-        <Label fx:id="userLoginLabel" layoutX="272.0" layoutY="64.0" prefHeight="26.0" prefWidth="470.0" text="Авторизованный пользователь:" />
-        <Label fx:id="userIdLabel" layoutX="272.0" layoutY="90.0" prefHeight="26.0" prefWidth="402.0" text="ID: " />
-        <Label fx:id="userRoleLabel" layoutX="272.0" layoutY="116.0" prefHeight="26.0" prefWidth="210.0" text="Уровень доступа:" />
+        <Label fx:id="userLoginLabel" layoutX="293.0" layoutY="169.0" prefHeight="26.0" prefWidth="475.0" text="Авторизованный пользователь:" />
+        <Label layoutX="293.0" layoutY="123.0" prefHeight="26.0" prefWidth="210.0" text="Главное меню">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
     </AnchorPane>
 </VBox>

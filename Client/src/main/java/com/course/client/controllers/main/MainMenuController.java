@@ -15,7 +15,7 @@ public class MainMenuController extends SceneController
     private Button usersMenuButton, inventoryMenuButton, settingsMenuButton, exitButton;
 
     @FXML
-    private Label userLoginLabel, userIdLabel, userRoleLabel;
+    private Label userLoginLabel;
 
     @Override
     public void setContext(ModelContext modelContext, UiContext uiContext)
@@ -29,8 +29,6 @@ public class MainMenuController extends SceneController
     {
         User currentUser = modelContext.getCurrentUser();
         userLoginLabel.setText("Авторизованный пользователь: " + currentUser.getLogin());
-        userIdLabel.setText("ID: " + currentUser.getId().toString());
-        userRoleLabel.setText("Уровень доступа: " + currentUser.getRole().name());
     }
 
     @FXML

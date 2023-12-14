@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.auth.LoginController">
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -10,6 +11,9 @@
         <Button fx:id="signInButton" layoutX="387.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSignInButtonClicked" prefHeight="26.0" prefWidth="66.0" text="Вход" />
         <Button fx:id="signUpButton" layoutX="283.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSignUpButtonClicked" prefHeight="26.0" prefWidth="97.0" text="Регистрация" />
         <Button fx:id="exitButton" layoutX="283.0" layoutY="422.0" mnemonicParsing="false" onAction="#onExitButtonClicked" prefHeight="26.0" prefWidth="171.0" text="Выход из приложения" />
-        <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="Вход" />
+        <Label layoutX="277.0" layoutY="88.0" prefHeight="156.0" prefWidth="294.0" text="Авторизация">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
     </AnchorPane>
 </VBox>

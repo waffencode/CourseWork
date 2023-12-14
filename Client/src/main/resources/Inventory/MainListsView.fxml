@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.MainListController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -13,7 +14,10 @@
     <Button layoutX="580.0" layoutY="185.0" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="132.0" text="Поиск" />
     <Button layoutX="580.0" layoutY="222.0" mnemonicParsing="false" onAction="#onMergeButtonClicked" prefHeight="26.0" prefWidth="132.0" text="Объединить списки" />
     <Button layoutX="421.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Создать список" />
-    <Label layoutX="190.0" layoutY="14.0" prefHeight="26.0" prefWidth="294.0" text="MainListsView.fxml" />
+    <Label layoutX="74.0" layoutY="95.0" prefHeight="26.0" prefWidth="294.0" text="Инвентарь">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
     <ListView fx:id="listsView" layoutX="74.0" layoutY="184.0" prefHeight="216.0" prefWidth="316.0" />
 </AnchorPane>
 </VBox>
