@@ -21,6 +21,7 @@ public class Initializer implements ServletContextListener
         context.addServlet("ObjectViewListServlet", new ObjectViewListServlet(applicationServiceProvider)).addMapping("/object/view_list");
         context.addServlet("UserServlet", new UserServlet(applicationServiceProvider)).addMapping("/user");
         context.addServlet("UserLoginServlet", new UserLoginServlet(applicationServiceProvider)).addMapping("/user/login");
+        context.addServlet("SearchServlet", new SearchServlet(applicationServiceProvider)).addMapping("/object/search");
     }
 
     @Override

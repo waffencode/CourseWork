@@ -579,4 +579,82 @@ public class Database
             e.printStackTrace();
         }
     }
+
+    public List<InventoryObject> searchObjectsByNumber(String number)
+    {
+        List<InventoryObject> objects = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE inventory_number LIKE ?;"))
+        {
+            statement.setString(1, number);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                InventoryObject object = new InventoryObject();
+
+                object.setInventoryNumber(resultSet.getString("inventory_number"));
+                object.setName(resultSet.getString("name"));
+                object.setInPlace(Objects.equals(resultSet.getString("is_in_place"), "1"));
+                object.setCategory(Category.values()[Integer.parseInt(resultSet.getString("category"))]);
+                object.setListId(UUID.fromString(resultSet.getString("list_id")));
+                object.setDecommissioned(Objects.equals(resultSet.getString("is_decommissioned"), "1"));
+                object.setAddedById(UUID.fromString(resultSet.getString("added_by_id")));
+                object.setAdditionDate(Timestamp.valueOf(resultSet.getString("addition_date")));
+
+                if (resultSet.getString("decommissioned_by_id") != null)
+                {
+                    object.setDecommissionedById(UUID.fromString(resultSet.getString("decommissioned_by_id")));
+                    object.setDecommissionDate(Timestamp.valueOf(resultSet.getString("decommission_date")));
+                }
+
+                objects.add(object);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return objects;
+    }
+
+    public List<InventoryObject> searchObjectsByName(String name)
+    {
+        List<InventoryObject> objects = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE name LIKE ?;"))
+        {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                InventoryObject object = new InventoryObject();
+
+                object.setInventoryNumber(resultSet.getString("inventory_number"));
+                object.setName(resultSet.getString("name"));
+                object.setInPlace(Objects.equals(resultSet.getString("is_in_place"), "1"));
+                object.setCategory(Category.values()[Integer.parseInt(resultSet.getString("category"))]);
+                object.setListId(UUID.fromString(resultSet.getString("list_id")));
+                object.setDecommissioned(Objects.equals(resultSet.getString("is_decommissioned"), "1"));
+                object.setAddedById(UUID.fromString(resultSet.getString("added_by_id")));
+                object.setAdditionDate(Timestamp.valueOf(resultSet.getString("addition_date")));
+
+                if (resultSet.getString("decommissioned_by_id") != null)
+                {
+                    object.setDecommissionedById(UUID.fromString(resultSet.getString("decommissioned_by_id")));
+                    object.setDecommissionDate(Timestamp.valueOf(resultSet.getString("decommission_date")));
+                }
+
+                objects.add(object);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return objects;
+    }
 }
