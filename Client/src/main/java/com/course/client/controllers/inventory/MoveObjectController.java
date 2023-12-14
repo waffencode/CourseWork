@@ -5,6 +5,7 @@ import com.course.client.domain.InventoryObject;
 import com.course.client.domain.InventoryObjectsList;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
+import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,7 +61,13 @@ public class MoveObjectController extends SceneController
             object.setListId(list.getId());
             modelContext.getRequestHandler().updateObject(object, modelContext.getCurrentUser().getId());
             modelContext.setCurrentObjectId(null);
+
+            NotificationDialog.showInformationDialog("Список объекта успешно изменён!");
             goToSceneWithResource("Inventory/ObjectsInListView.fxml");
+        }
+        else
+        {
+            NotificationDialog.showWarningDialog("Необходимо выбрать список для перемещения объекта!");
         }
     }
 }

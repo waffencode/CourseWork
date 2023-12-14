@@ -113,6 +113,7 @@ public class MainListController extends SceneController
         if (selectedListId != null)
         {
             modelContext.getRequestHandler().deleteList(selectedListId, modelContext.getCurrentUser().getId());
+            NotificationDialog.showInformationDialog("Список удалён!");
             updateList();
         }
     }
@@ -131,6 +132,7 @@ public class MainListController extends SceneController
         if (selectedListId != null)
         {
             modelContext.getRequestHandler().archiveList(selectedListId, modelContext.getCurrentUser().getId());
+            NotificationDialog.showInformationDialog("Список архивирован!");
             updateList();
         }
     }

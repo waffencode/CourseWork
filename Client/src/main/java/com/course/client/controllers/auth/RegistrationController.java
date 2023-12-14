@@ -42,6 +42,7 @@ public class RegistrationController extends SceneController
         user.setRole(Role.USER);
         modelContext.getRequestHandler().createUser(user);
 
+        NotificationDialog.showInformationDialog("Аккаунт успешно создан!");
         goToSceneWithResource("Auth/LoginView.fxml");
     }
 

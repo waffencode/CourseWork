@@ -55,7 +55,7 @@ public class EditListController extends SceneController
         InventoryObjectsList list = modelContext.getRequestHandler().getList(listId, modelContext.getCurrentUser().getId());
         list.setName(listNameField.getText());
         modelContext.getRequestHandler().updateList(list, modelContext.getCurrentUser().getId());
-
+        NotificationDialog.showInformationDialog("Список успешно изменён!");
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 

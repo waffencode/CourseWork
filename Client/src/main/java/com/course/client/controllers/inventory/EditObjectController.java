@@ -80,6 +80,7 @@ public class EditObjectController extends SceneController
         modelContext.getRequestHandler().updateObject(object, modelContext.getCurrentUser().getId());
 
         modelContext.setCurrentObjectId(null);
+        NotificationDialog.showInformationDialog("Объект успешно изменён!");
         goToSceneWithResource("Inventory/ObjectsInListView.fxml");
     }
 

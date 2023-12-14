@@ -79,6 +79,7 @@ public class EditUserController extends SceneController
         modelContext.getRequestHandler().updateUser(user, modelContext.getCurrentUser().getId());
 
         modelContext.setCurrentUserOnEditId(null);
+        NotificationDialog.showInformationDialog("Данные пользователя успешно изменены!");
         goToSceneWithResource("User/UserListView.fxml");
     }
 

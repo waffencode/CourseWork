@@ -75,6 +75,7 @@ public class CreateObjectController extends SceneController
 
         modelContext.getRequestHandler().createObject(object, modelContext.getCurrentUser().getId());
 
+        NotificationDialog.showInformationDialog("Объект успешно создан!");
         goToSceneWithResource("Inventory/ObjectsInListView.fxml");
     }
 

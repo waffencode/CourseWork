@@ -39,6 +39,7 @@ public class CreateListController extends SceneController
         list.setCreatedById(modelContext.getCurrentUser().getId());
         modelContext.getRequestHandler().createList(list, modelContext.getCurrentUser().getId());
 
+        NotificationDialog.showInformationDialog("Список успешно создан!");
         goToSceneWithResource("Inventory/MainListsView.fxml");
     }
 
