@@ -1,6 +1,5 @@
 package com.course.client.service;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -15,7 +14,6 @@ public class Config
         try
         {
             String appConfigPath = "application.properties";
-            System.out.println(appConfigPath);
             Properties appProps = new Properties();
             appProps.load(new FileInputStream(appConfigPath));
 

@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 
 public class TcpRequestHandler
 {
-    private String host;
-    private int port;
+    private final String host;
+    private final int port;
 
     public TcpRequestHandler(Config config)
     {
@@ -211,27 +211,6 @@ public class TcpRequestHandler
         }
 
         return null;
-    }
-
-    private void sendPost(String path, String body)
-    {
-        try (Socket socket = new Socket(host, port);
-             OutputStream outputStream = socket.getOutputStream();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
-        {
-            String request = "POST " + path + " HTTP/1.1\r\n" +
-                    "Host: " + host + "\r\n" +
-                    "Content-Type: application/json\r\n" +
-                    "Content-Length: " + body.length() + "\r\n" +
-                    "Connection: close\r\n\r\n" +
-                    body;
-
-            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private void sendPostWithQuery(String path, String query, String body)

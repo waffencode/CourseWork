@@ -1,6 +1,7 @@
 package com.course.server.database;
 
 import com.course.server.domain.*;
+import com.course.server.service.Config;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,14 +11,18 @@ import java.util.UUID;
 
 public class Database
 {
-    private static final String DB_URL = "jdbc:mysql://localhost/inventory";
-    private static final String USER = "root";
-    private static final String PASS = "+WHLm0WsP^j6hr7mfD58";
+    private String DB_URL;
+    private String USER;
+    private String PASS;
 
     public Database()
     {
         try
         {
+            Config config = new Config();
+            DB_URL = config.getDbUrl();
+            USER = config.getDbLogin();
+            PASS = config.getDbPassword();
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
         } catch (SQLException e)
         {
