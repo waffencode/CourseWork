@@ -182,6 +182,26 @@ public class TcpRequestHandler
         sendDelete(path, query);
     }
 
+    public List<InventoryObject> searchObjectsById(String id, UUID by)
+    {
+        String path = "/inventory/object/search";
+        String query = "id=" + id + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+
+        return new JsonStream().readObjectArray(json);
+    }
+
+    public List<InventoryObject> searchObjectsByName(String name, UUID by)
+    {
+        String path = "/inventory/object/search";
+        String query = "name=" + name + "&by=" + by.toString();
+        String response = sendGet(path, query);
+        String json = getJsonFromResponse(response);
+
+        return new JsonStream().readObjectArray(json);
+    }
+
     private String sendGet(String path, String query)
     {
         try (Socket socket = new Socket(host, port);

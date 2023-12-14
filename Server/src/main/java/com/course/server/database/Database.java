@@ -585,9 +585,9 @@ public class Database
         List<InventoryObject> objects = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE inventory_number LIKE ?;"))
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE inventory_number LIKE '%" + number + "%';"))
         {
-            statement.setString(1, number);
+//            statement.setString(1, number);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
@@ -624,9 +624,9 @@ public class Database
         List<InventoryObject> objects = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE name LIKE ?;"))
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM inventory_objects WHERE name LIKE '%" + name + "%';"))
         {
-            statement.setString(1, name);
+//            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())

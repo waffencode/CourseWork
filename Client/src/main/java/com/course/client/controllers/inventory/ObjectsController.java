@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,6 +99,17 @@ public class ObjectsController extends SceneController
         {
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для списания!");
             return;
+        }
+
+        String selectedListId = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
+
+        if (selectedListId != null)
+        {
+            InventoryObject object = modelContext.getRequestHandler().getObject(selectedListId, modelContext.getCurrentUser().getId());
+            object.setDecommissioned(true);
+            object.setDecommissionedById(modelContext.getCurrentUser().getId());
+            object.setDecommissionDate(new Timestamp(System.currentTimeMillis()));
+            modelContext.getRequestHandler().updateObject(object, modelContext.getCurrentUser().getId());
         }
     }
 

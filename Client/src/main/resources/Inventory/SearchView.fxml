@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.SearchController">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+    <Button layoutX="421.0" layoutY="374.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Назад" />
+    <Button layoutX="423.0" layoutY="259.0" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Поиск" />
+    <Button layoutX="421.0" layoutY="300.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Просмотр" />
+    <Label layoutX="190.0" layoutY="14.0" prefHeight="26.0" prefWidth="294.0" text="SearchView.fxml" />
+    <ListView fx:id="listsView" layoutX="74.0" layoutY="184.0" prefHeight="216.0" prefWidth="316.0" />
+      <TextField fx:id="criteriaField" layoutX="74.0" layoutY="123.0" prefHeight="26.0" prefWidth="497.0" promptText="Введите критерий поиска" />
+      <RadioButton fx:id="nameSearchButton" layoutX="421.0" layoutY="167.0" mnemonicParsing="false" text="Поиск объекта по имени" />
+      <RadioButton fx:id="idSearchButton" layoutX="422.0" layoutY="199.0" mnemonicParsing="false" text="Поиск по инвентарному номеру" />
+</AnchorPane>
+</VBox>

@@ -83,6 +83,12 @@ public class MainListController extends SceneController
     }
 
     @FXML
+    private void onSearchButtonClicked()
+    {
+        goToSceneWithResource("Inventory/SearchView.fxml");
+    }
+
+    @FXML
     private void onDeleteButtonClicked()
     {
         if (listsView.getSelectionModel().getSelectedItem() == null)
