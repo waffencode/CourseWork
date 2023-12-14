@@ -27,6 +27,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        applicationServiceProvider.logger.info("HELLO");
         if (req.getParameter("id") == null && req.getParameter("login") != null)
         {
             String login = req.getParameter("login");
