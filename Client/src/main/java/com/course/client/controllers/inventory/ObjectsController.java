@@ -135,5 +135,13 @@ public class ObjectsController extends SceneController
             NotificationDialog.showWarningDialog("Необходимо выбрать объект для изменения списка!");
             return;
         }
+
+        String selectedListId = listsView.getSelectionModel().getSelectedItem().getInventoryNumber();
+
+        if (selectedListId != null)
+        {
+            modelContext.setCurrentObjectId(selectedListId);
+            goToSceneWithResource("Inventory/MoveObjectView.fxml");
+        }
     }
 }

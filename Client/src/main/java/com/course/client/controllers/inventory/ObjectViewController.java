@@ -1,19 +1,13 @@
 package com.course.client.controllers.inventory;
 
-import com.course.client.domain.Category;
 import com.course.client.domain.InventoryObject;
 import com.course.client.domain.InventoryObjectsList;
 import com.course.client.domain.User;
 import com.course.client.service.ModelContext;
 import com.course.client.service.UiContext;
 import com.course.client.ui.SceneController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 public class ObjectViewController extends SceneController
 {
