@@ -2,14 +2,13 @@ package com.course.client.controllers.external;
 
 import com.course.client.domain.InventoryObject;
 import com.course.client.domain.InventoryObjectsList;
-import com.course.client.service.JsonFile;
+import com.course.client.service.file.JsonFile;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;

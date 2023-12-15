@@ -1,7 +1,9 @@
-package com.course.client.service;
+package com.course.client.service.context;
 
 import com.course.client.InventoryApplication;
 import com.course.client.domain.User;
+import com.course.client.service.config.Config;
+import com.course.client.service.network.TcpRequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

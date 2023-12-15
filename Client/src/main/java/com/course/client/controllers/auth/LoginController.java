@@ -1,10 +1,8 @@
 package com.course.client.controllers.auth;
 
-import com.course.client.service.HashProvider;
+import com.course.client.service.security.HashProvider;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
-import com.course.client.ui.SceneProvider;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 

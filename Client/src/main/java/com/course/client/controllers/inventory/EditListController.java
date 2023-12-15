@@ -1,8 +1,8 @@
 package com.course.client.controllers.inventory;
 
 import com.course.client.domain.InventoryObjectsList;
-import com.course.client.service.ModelContext;
-import com.course.client.service.UiContext;
+import com.course.client.service.context.ModelContext;
+import com.course.client.service.context.UiContext;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.fxml.FXML;

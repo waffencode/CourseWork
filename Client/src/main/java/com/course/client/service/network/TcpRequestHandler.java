@@ -1,6 +1,7 @@
-package com.course.client.service;
+package com.course.client.service.network;
 
 import com.course.client.domain.*;
+import com.course.client.service.config.Config;
 
 import java.io.*;
 import java.net.Socket;

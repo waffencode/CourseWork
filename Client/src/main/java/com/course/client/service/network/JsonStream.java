@@ -1,4 +1,4 @@
-package com.course.client.service;
+package com.course.client.service.network;
 
 import com.course.client.domain.*;
 import com.fasterxml.jackson.core.type.TypeReference;

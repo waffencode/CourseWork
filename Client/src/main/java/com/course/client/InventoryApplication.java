@@ -1,6 +1,7 @@
 package com.course.client;
 
-import com.course.client.service.*;
+import com.course.client.service.context.ModelContext;
+import com.course.client.service.context.UiContext;
 import com.course.client.ui.*;
 import javafx.application.Application;
 import javafx.stage.Stage;

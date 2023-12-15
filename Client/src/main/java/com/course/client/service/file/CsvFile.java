@@ -1,4 +1,4 @@
-package com.course.client.service;
+package com.course.client.service.file;
 
 import com.course.client.domain.InventoryObject;
 

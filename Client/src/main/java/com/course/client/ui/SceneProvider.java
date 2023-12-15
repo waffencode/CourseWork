@@ -1,7 +1,7 @@
 package com.course.client.ui;
 
-import com.course.client.service.ModelContext;
-import com.course.client.service.UiContext;
+import com.course.client.service.context.ModelContext;
+import com.course.client.service.context.UiContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

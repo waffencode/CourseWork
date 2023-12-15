@@ -2,10 +2,10 @@ package com.course.client.controllers.external;
 
 import com.course.client.domain.InventoryObject;
 import com.course.client.domain.InventoryObjectsList;
-import com.course.client.service.CsvFile;
-import com.course.client.service.JsonFile;
-import com.course.client.service.ModelContext;
-import com.course.client.service.UiContext;
+import com.course.client.service.file.CsvFile;
+import com.course.client.service.file.JsonFile;
+import com.course.client.service.context.ModelContext;
+import com.course.client.service.context.UiContext;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;

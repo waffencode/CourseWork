@@ -1,4 +1,4 @@
-package com.course.client.service;
+package com.course.client.service.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;

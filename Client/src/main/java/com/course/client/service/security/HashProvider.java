@@ -1,4 +1,4 @@
-package com.course.client.service;
+package com.course.client.service.security;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashCode;

@@ -1,6 +1,7 @@
 package com.course.client.ui;
 
-import com.course.client.service.*;
+import com.course.client.service.context.ModelContext;
+import com.course.client.service.context.UiContext;
 
 public abstract class SceneController
 {
