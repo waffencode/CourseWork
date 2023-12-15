@@ -88,7 +88,7 @@ public class TcpRequestHandler
     public InventoryObject getObject(String inventoryNumber, UUID by)
     {
         String path = "/inventory/object";
-        String query = "id=" + inventoryNumber.toString() + "&by=" + by.toString();
+        String query = "id=" + inventoryNumber + "&by=" + by.toString();
         String response = sendGet(path, query);
         return new JsonStream().readObject(getJsonFromResponse(response));
     }
@@ -171,11 +171,6 @@ public class TcpRequestHandler
         sendGet(path, query);
     }
 
-    public void restoreList(UUID listId)
-    {
-
-    }
-
     public void deleteList(UUID id, UUID by)
     {
         String path = "/inventory/list";
@@ -205,108 +200,53 @@ public class TcpRequestHandler
 
     private String sendGet(String path, String query)
     {
-        try (Socket socket = new Socket(host, port);
-             OutputStream outputStream = socket.getOutputStream();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
-        {
-            String request = "GET " + path + "?" + query + " HTTP/1.1\r\n" +
-                    "Host: " + host + "\r\n" +
-                    "Connection: close\r\n\r\n";
+        String request = "GET " + path + "?" + query + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
+                "Connection: close\r\n\r\n";
 
-            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null)
-            {
-                response.append(line).append("\n");
-            }
-
-            String responseBody = response.toString();
-
-            return responseBody;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        return getRequestResult(request);
     }
 
-    private void sendPostWithQuery(String path, String query, String body)
+    private String sendPostWithQuery(String path, String query, String body)
     {
-        try (Socket socket = new Socket(host, port);
-             OutputStream outputStream = socket.getOutputStream();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
-        {
-            String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" +
-                    "Host: " + host + "\r\n" +
-                    "Content-Type: application/json\r\n" +
-                    "Content-Length: " + body.length() + "\r\n" +
-                    "Connection: close\r\n\r\n" +
-                    body;
+        String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Content-Length: " + body.length() + "\r\n" +
+                "Connection: close\r\n\r\n" +
+                body;
 
-            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null)
-            {
-                response.append(line).append("\n");
-            }
-
-            String responseBody = response.toString();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        return getRequestResult(request);
     }
 
 
-    private void sendPut(String path, String query, String body)
+    private String sendPut(String path, String query, String body)
     {
-        try (Socket socket = new Socket(host, port);
-             OutputStream outputStream = socket.getOutputStream();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
-        {
-            String request = "PUT " + path + "?" + query + " HTTP/1.1\r\n" +
-                    "Host: " + host + "\r\n" +
-                    "Content-Type: application/json\r\n" +
-                    "Content-Length: " + body.length() + "\r\n" +
-                    "Connection: close\r\n\r\n" +
-                    body;
+        String request = "PUT " + path + "?" + query + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Content-Length: " + body.length() + "\r\n" +
+                "Connection: close\r\n\r\n" +
+                body;
 
-            outputStream.write(request.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null)
-            {
-                response.append(line).append("\n");
-            }
-
-            String responseBody = response.toString();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        return getRequestResult(request);
     }
 
     private String sendDelete(String path, String query)
     {
+        String request = "DELETE " + path + "?" + query + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
+                "Connection: close\r\n\r\n";
+
+        return getRequestResult(request);
+    }
+
+    private String getRequestResult(String request)
+    {
         try (Socket socket = new Socket(host, port);
              OutputStream outputStream = socket.getOutputStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)))
         {
-            String request = "DELETE " + path + "?" + query + " HTTP/1.1\r\n" +
-                    "Host: " + host + "\r\n" +
-                    "Connection: close\r\n\r\n";
-
             outputStream.write(request.getBytes(StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
@@ -316,19 +256,15 @@ public class TcpRequestHandler
                 response.append(line).append("\n");
             }
 
-            String responseBody = response.toString();
-
-            return responseBody;
-        }
-        catch (IOException e)
+            return response.toString();
+        } catch (IOException e)
         {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
-    private UUID getUuidFromResponse(String string)
+    private static UUID getUuidFromResponse(String string)
     {
         String regex = "\\b[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}\\b";
         Pattern pattern = Pattern.compile(regex);
@@ -347,7 +283,7 @@ public class TcpRequestHandler
         return null;
     }
 
-    private String getJsonFromResponse(String response)
+    private static String getJsonFromResponse(String response)
     {
         String[] parts = response.split("\n\n");
         return parts[1];
