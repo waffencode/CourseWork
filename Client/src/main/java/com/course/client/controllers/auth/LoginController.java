@@ -23,6 +23,7 @@ public class LoginController extends SceneController
 
         if (!modelContext.getRequestHandler().isConnectionAvailable())
         {
+            modelContext.getLogger().error("SignIn error: no connection");
             NotificationDialog.showErrorDialog("Ошибка: отсутствует подключение к серверу!");
             return;
         }
