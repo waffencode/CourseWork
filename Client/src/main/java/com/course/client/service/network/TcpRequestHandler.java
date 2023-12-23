@@ -4,6 +4,7 @@ import com.course.client.domain.*;
 import com.course.client.service.config.Config;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -19,6 +20,18 @@ public class TcpRequestHandler
     {
         host = config.getHostname();
         port = config.getPort();
+    }
+
+    public boolean isConnectionAvailable()
+    {
+        try (Socket ignored = new Socket(host, port))
+        {
+            return true;
+        }
+        catch (IOException ex)
+        {
+            return false;
+        }
     }
 
     public void createUser(User user)
@@ -200,48 +213,62 @@ public class TcpRequestHandler
 
     private String sendGet(String path, String query)
     {
-        String request = "GET " + path + "?" + query + " HTTP/1.1\r\n" +
-                "Host: " + host + "\r\n" +
-                "Connection: close\r\n\r\n";
+        String request = "GET " + path + "?" + query + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Connection: close\r\n\r\n";
 
-        return getRequestResult(request);
+        try {
+            return getRequestResult(request);
+        }
+        catch (ConnectException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     private String sendPostWithQuery(String path, String query, String body)
     {
-        String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" +
-                "Host: " + host + "\r\n" +
-                "Content-Type: application/json\r\n" +
-                "Content-Length: " + body.length() + "\r\n" +
-                "Connection: close\r\n\r\n" +
-                body;
+        String request = "POST " + path + "?" + query + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Content-Type: application/json\r\n" + "Content-Length: " + body.length() + "\r\n" + "Connection: close\r\n\r\n" + body;
 
-        return getRequestResult(request);
+        try {
+            return getRequestResult(request);
+        }
+        catch (ConnectException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 
     private String sendPut(String path, String query, String body)
     {
-        String request = "PUT " + path + "?" + query + " HTTP/1.1\r\n" +
-                "Host: " + host + "\r\n" +
-                "Content-Type: application/json\r\n" +
-                "Content-Length: " + body.length() + "\r\n" +
-                "Connection: close\r\n\r\n" +
-                body;
+        String request = "PUT " + path + "?" + query + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Content-Type: application/json\r\n" + "Content-Length: " + body.length() + "\r\n" + "Connection: close\r\n\r\n" + body;
 
-        return getRequestResult(request);
+        try {
+            return getRequestResult(request);
+        }
+        catch (ConnectException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     private String sendDelete(String path, String query)
     {
-        String request = "DELETE " + path + "?" + query + " HTTP/1.1\r\n" +
-                "Host: " + host + "\r\n" +
-                "Connection: close\r\n\r\n";
+        String request = "DELETE " + path + "?" + query + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Connection: close\r\n\r\n";
 
-        return getRequestResult(request);
+        try {
+            return getRequestResult(request);
+        }
+        catch (ConnectException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
-    private String getRequestResult(String request)
+    private String getRequestResult(String request) throws ConnectException
     {
         try (Socket socket = new Socket(host, port);
              OutputStream outputStream = socket.getOutputStream();
@@ -257,7 +284,12 @@ public class TcpRequestHandler
             }
 
             return response.toString();
-        } catch (IOException e)
+        }
+        catch (ConnectException ex)
+        {
+            throw ex;
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
             return null;

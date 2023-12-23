@@ -21,6 +21,12 @@ public class LoginController extends SceneController
     {
         modelContext.getLogger().info("SignIn attempt");
 
+        if (!modelContext.getRequestHandler().isConnectionAvailable())
+        {
+            NotificationDialog.showErrorDialog("Ошибка: отсутствует подключение к серверу!");
+            return;
+        }
+
         if (loginField.getText().isBlank() || passwordField.getText().isBlank())
         {
             modelContext.getLogger().error("SignIn attempt with invalid data");
