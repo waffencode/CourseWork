@@ -21,17 +21,17 @@ public class LoginController extends SceneController
     {
         modelContext.getLogger().info("Sign in attempt");
 
-        if (!modelContext.getRequestHandler().isConnectionAvailable())
-        {
-            modelContext.getLogger().error("Sign in error: no connection");
-            NotificationDialog.showErrorDialog("Ошибка: отсутствует подключение к серверу!");
-            return;
-        }
-
         if (loginField.getText().isBlank() || passwordField.getText().isBlank())
         {
             modelContext.getLogger().error("Sign in attempt failed: incorrect input");
             NotificationDialog.showInformationDialog("Введите имя пользователя и пароль!");
+            return;
+        }
+
+        if (!modelContext.getRequestHandler().isConnectionAvailable())
+        {
+            modelContext.getLogger().error("Sign in error: no connection");
+            NotificationDialog.showErrorDialog("Ошибка: отсутствует подключение к серверу!");
             return;
         }
 
@@ -43,8 +43,8 @@ public class LoginController extends SceneController
 
         if (authorizedUserId != null)
         {
-            modelContext.getLogger().info("User with ID {} signed in", authorizedUserId);
             modelContext.setCurrentUser(modelContext.getRequestHandler().getUser(authorizedUserId, authorizedUserId));
+            modelContext.getLogger().info("User with ID {} signed in", authorizedUserId);
             goToSceneWithResource("Main/MainMenuView.fxml");
         }
         else
