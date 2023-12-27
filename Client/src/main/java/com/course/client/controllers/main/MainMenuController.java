@@ -1,5 +1,6 @@
 package com.course.client.controllers.main;
 
+import com.course.client.domain.Role;
 import com.course.client.domain.User;
 import com.course.client.service.context.ModelContext;
 import com.course.client.service.context.UiContext;
@@ -22,6 +23,9 @@ public class MainMenuController extends SceneController
         this.modelContext = modelContext;
         this.uiContext = uiContext;
         updateLabels();
+
+        Role userRole = modelContext.getCurrentUser().getRole();
+        usersMenuButton.setVisible(userRole == Role.ADMINISTRATOR);
     }
 
     private void updateLabels()
