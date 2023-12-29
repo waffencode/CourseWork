@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -21,14 +22,38 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-          <Button mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Назад" GridPane.rowIndex="6" />
-          <Button fx:id="viewButton" mnemonicParsing="false" onAction="#onViewButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Просмотр" GridPane.rowIndex="1" />
-          <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Удалить" GridPane.columnIndex="1" />
-          <Button fx:id="archiveButton" mnemonicParsing="false" onAction="#onArchiveButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Архивировать" GridPane.rowIndex="4" />
-          <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать список" GridPane.rowIndex="3" />
-          <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Поиск" />
-          <Button fx:id="mergeButton" mnemonicParsing="false" onAction="#onMergeButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Объединить списки" GridPane.rowIndex="5" />
-          <Button fx:id="createButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Создать список" GridPane.rowIndex="2" />
+          <Button cancelButton="true" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Назад" GridPane.rowIndex="6">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="viewButton" defaultButton="true" mnemonicParsing="false" onAction="#onViewButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Просмотр" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Удалить" GridPane.columnIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="archiveButton" mnemonicParsing="false" onAction="#onArchiveButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Архивировать" GridPane.rowIndex="4">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditButtonClicked" text="Редактировать список" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Поиск">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="mergeButton" mnemonicParsing="false" onAction="#onMergeButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Объединить списки" GridPane.rowIndex="5">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+          <Button fx:id="createButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Создать список" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </GridPane>
     <Label layoutX="74.0" layoutY="95.0" prefHeight="26.0" prefWidth="294.0" text="Инвентарь">
