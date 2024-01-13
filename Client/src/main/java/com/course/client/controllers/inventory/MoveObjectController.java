@@ -23,7 +23,7 @@ public class MoveObjectController extends SceneController
     private ChoiceBox<InventoryObjectsList> selectListChoice;
 
     @Override
-    public void setContext(ModelContext modelContext, UiContext uiContext)
+    public void initController(ModelContext modelContext, UiContext uiContext)
     {
         this.modelContext = modelContext;
         this.uiContext = uiContext;

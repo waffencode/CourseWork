@@ -17,7 +17,7 @@ public class SceneProvider
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
             Parent root = loader.load();
             SceneController controller = loader.getController();
-            controller.setContext(modelContext, uiContext);
+            controller.initController(modelContext, uiContext);
             return new Scene(root);
         }
         catch (IOException e)

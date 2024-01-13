@@ -26,7 +26,7 @@ public class SearchController extends SceneController
     private ListView<InventoryObject> listsView;
 
     @Override
-    public void setContext(ModelContext modelContext, UiContext uiContext)
+    public void initController(ModelContext modelContext, UiContext uiContext)
     {
         this.modelContext = modelContext;
         this.uiContext = uiContext;

@@ -6,7 +6,6 @@ import com.course.client.service.context.ModelContext;
 import com.course.client.service.context.UiContext;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
-import com.course.client.domain.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +24,7 @@ public class MainListController extends SceneController
     Button viewButton, deleteButton, archiveButton, editButton, searchButton, mergeButton, createButton;
 
     @Override
-    public void setContext(ModelContext modelContext, UiContext uiContext)
+    public void initController(ModelContext modelContext, UiContext uiContext)
     {
         this.modelContext = modelContext;
         this.uiContext = uiContext;
