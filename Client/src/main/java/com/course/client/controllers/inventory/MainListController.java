@@ -119,19 +119,17 @@ public class MainListController extends SceneController
         }
 
         UUID selectedListId = listsView.getSelectionModel().getSelectedItem().getId();
+
         if (!modelContext.getRequestHandler().getAllObjectsFromList(selectedListId, modelContext.getCurrentUser().getId()).isEmpty())
         {
             NotificationDialog.showWarningDialog("Невозможно удалить список! В списке находятся объекты!");
             return;
         }
 
-        if (selectedListId != null)
-        {
-            modelContext.getRequestHandler().deleteList(selectedListId, modelContext.getCurrentUser().getId());
-            NotificationDialog.showInformationDialog("Список удалён!");
-            modelContext.getLogger().info("List " + selectedListId + " deleted");
-            updateList();
-        }
+        modelContext.getRequestHandler().deleteList(selectedListId, modelContext.getCurrentUser().getId());
+        NotificationDialog.showInformationDialog("Список удалён!");
+        modelContext.getLogger().info("List " + selectedListId + " deleted");
+        updateList();
     }
 
     @FXML

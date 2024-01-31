@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
     <Button layoutX="421.0" layoutY="374.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Назад" />
     <Button layoutX="423.0" layoutY="259.0" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Поиск" />
-    <Button layoutX="421.0" layoutY="300.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Просмотр" />
+    <Button layoutX="421.0" layoutY="300.0" mnemonicParsing="false" onAction="#onViewButtonClicked" prefHeight="26.0" prefWidth="138.0" text="Просмотр" />
     <Label layoutX="74.0" layoutY="30.0" prefHeight="26.0" prefWidth="294.0" text="Поиск">
          <font>
             <Font size="30.0" />
