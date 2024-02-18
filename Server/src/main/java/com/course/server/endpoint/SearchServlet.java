@@ -25,7 +25,7 @@ public class SearchServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("GET at Search with: " + req.toString());
+//        applicationServiceProvider.logger.info("GET at Search with: " + req.toString());
 
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 

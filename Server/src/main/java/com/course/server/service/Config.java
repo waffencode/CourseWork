@@ -1,6 +1,5 @@
 package com.course.server.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -14,15 +13,12 @@ public class Config
     {
         try
         {
-            String rootPath = "C:/Users/waffencode/";
-            String appConfigPath = rootPath + "application.properties";
-            System.out.println(appConfigPath);
             Properties appProps = new Properties();
-            appProps.load(new FileInputStream(appConfigPath));
+            appProps.load(Config.class.getClassLoader().getResourceAsStream("application.properties"));
 
-            dbUrl = appProps.getProperty("db_url", "jdbc:mysql://localhost/inventory");
-            dbLogin = appProps.getProperty("db_login", "root");
-            dbPassword = appProps.getProperty("db_password", "+WHLm0WsP^j6hr7mfD58");
+            dbUrl = appProps.getProperty("db_url");
+            dbLogin = appProps.getProperty("db_login");
+            dbPassword = appProps.getProperty("db_password");
         }
         catch (IOException e)
         {

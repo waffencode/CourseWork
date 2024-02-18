@@ -22,7 +22,7 @@ public class ListArchiveServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("GET at ListArchive with: " + req.toString());
+//        applicationServiceProvider.logger.info("GET at ListArchive with: " + req.toString());
 
         UUID listId = UUID.fromString(req.getParameter("id"));
         int action = Integer.parseInt(req.getParameter("action"));

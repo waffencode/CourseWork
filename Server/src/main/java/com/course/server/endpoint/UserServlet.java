@@ -27,7 +27,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("GET at User with: " + req.toString());
+//        applicationServiceProvider.logger.info("GET at User with: " + req.toString());
 
         if (req.getParameter("id") == null && req.getParameter("login") != null)
         {
@@ -77,7 +77,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("POST at User with: " + req.toString());
+//        applicationServiceProvider.logger.info("POST at User with: " + req.toString());
 
         BufferedReader reader = req.getReader();
         JsonStream stream = new JsonStream(reader);
@@ -88,7 +88,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("PUT at User with: " + req.toString());
+//        applicationServiceProvider.logger.info("PUT at User with: " + req.toString());
 
         UUID issuedById = UUID.fromString(req.getParameter("by"));
 
@@ -109,7 +109,7 @@ public class UserServlet extends HttpServlet
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        applicationServiceProvider.logger.info("DELETE at User with: " + req.toString());
+//        applicationServiceProvider.logger.info("DELETE at User with: " + req.toString());
 
         UUID userId = UUID.fromString(req.getParameter("id"));
         UUID issuedById = UUID.fromString(req.getParameter("by"));
