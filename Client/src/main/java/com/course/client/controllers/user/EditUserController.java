@@ -27,7 +27,7 @@ public class EditUserController extends SceneController
     private TextField userLoginField;
 
     @Override
-    public void setContext(ModelContext modelContext, UiContext uiContext)
+    public void initController(ModelContext modelContext, UiContext uiContext)
     {
         this.modelContext = modelContext;
         this.uiContext = uiContext;

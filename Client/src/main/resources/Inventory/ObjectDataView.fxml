@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.client.controllers.inventory.ObjectViewController">
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
-    <Button fx:id="backButton" layoutX="97.0" layoutY="412.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Назад" />
+    <Button fx:id="backButton" cancelButton="true" layoutX="100.0" layoutY="413.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="98.0" text="Назад">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></Button>
     <Label layoutX="97.0" layoutY="21.0" prefHeight="46.0" prefWidth="510.0" text="Просмотр данных объекта">
          <font>
             <Font size="30.0" />
          </font></Label>
-
-    <Label layoutX="100.0" layoutY="77.0" text="Инвентарный номер:" />
-    <Label fx:id="inventoryNumber" layoutX="312.0" layoutY="79.0" />
-
-    <Label layoutX="100.0" layoutY="102.0" text="Имя объекта:" />
-    <Label fx:id="name" layoutX="312.0" layoutY="104.0" />
-
-    <Label layoutX="100.0" layoutY="130.0" text="Категория:" />
-    <Label fx:id="category" layoutX="312.0" layoutY="130.0" prefWidth="150.0" />
-
-    <Label layoutX="100.0" layoutY="160.0" text="В наличии:" />
-    <Label fx:id="isInPlace" layoutX="312.0" layoutY="162.0" prefHeight="18.0" prefWidth="163.0" />
-
-    <Label layoutX="100.0" layoutY="220.0" text="Списан:" />
-    <Label fx:id="isDecommissioned" layoutX="312.0" layoutY="222.0" />
-
-    <Label layoutX="100.0" layoutY="250.0" text="Идентификатор списка:" />
-    <Label fx:id="listId" layoutX="312.0" layoutY="252.0" />
-
-    <Label layoutX="100.0" layoutY="280.0" text="Добавлен пользователем:" />
-    <Label fx:id="addedById" layoutX="312.0" layoutY="282.0" />
-
-    <Label layoutX="100.0" layoutY="310.0" text="Дата добавления:" />
-    <Label fx:id="additionDate" layoutX="312.0" layoutY="312.0" />
-
-    <Label layoutX="100.0" layoutY="340.0" text="Списан пользователем:" />
-    <Label fx:id="decommissionedById" layoutX="312.0" layoutY="342.0" />
-
-    <Label layoutX="100.0" layoutY="370.0" text="Дата списания:" />
-    <Label fx:id="decommissionDate" layoutX="312.0" layoutY="372.0" />
+      <GridPane layoutX="100.0" layoutY="87.0" prefHeight="312.0" prefWidth="645.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="178.2" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.40000000000003" minWidth="10.0" prefWidth="279.40000000000003" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+      
+          <Label text="Инвентарный номер:" />
+          <Label fx:id="inventoryNumber" text="null" GridPane.columnIndex="1" />
+      
+          <Label text="Имя объекта:" GridPane.rowIndex="1" />
+          <Label fx:id="name" text="null" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      
+          <Label text="Категория:" GridPane.rowIndex="2" />
+          <Label fx:id="category" prefWidth="150.0" text="null" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      
+          <Label text="В наличии:" GridPane.rowIndex="3" />
+          <Label fx:id="isInPlace" prefHeight="18.0" prefWidth="163.0" text="null" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      
+          <Label text="Списан:" GridPane.rowIndex="4" />
+          <Label fx:id="isDecommissioned" text="null" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      
+          <Label text="Идентификатор списка:" GridPane.rowIndex="5" />
+          <Label fx:id="listId" text="null" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      
+          <Label text="Добавлен пользователем:" GridPane.rowIndex="6" />
+          <Label fx:id="addedById" text="null" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      
+          <Label text="Дата добавления:" GridPane.rowIndex="7" />
+          <Label fx:id="additionDate" text="null" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      
+          <Label text="Списан пользователем:" GridPane.rowIndex="8" />
+          <Label fx:id="decommissionedById" text="null" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      
+          <Label text="Дата списания:" GridPane.rowIndex="9" />
+          <Label fx:id="decommissionDate" text="null" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+         </children>
+      </GridPane>
 
 </AnchorPane>
 </VBox>

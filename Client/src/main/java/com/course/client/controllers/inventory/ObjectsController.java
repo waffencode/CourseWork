@@ -2,6 +2,7 @@ package com.course.client.controllers.inventory;
 
 import com.course.client.domain.InventoryObject;
 import com.course.client.domain.InventoryObjectsList;
+import com.course.client.domain.Role;
 import com.course.client.service.context.ModelContext;
 import com.course.client.service.context.UiContext;
 import com.course.client.ui.NotificationDialog;
@@ -9,6 +10,7 @@ import com.course.client.ui.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -24,12 +26,22 @@ public class ObjectsController extends SceneController
     @FXML
     private ListView<InventoryObject> listsView;
 
+    @FXML
+    private Button addButton, editButton, decommissionButton, moveButton, deleteButton;
+
     @Override
-    public void setContext(ModelContext modelContext, UiContext uiContext)
+    public void initController(ModelContext modelContext, UiContext uiContext)
     {
         this.modelContext = modelContext;
         this.uiContext = uiContext;
         updateList();
+
+        Role userRole = modelContext.getCurrentUser().getRole();
+        deleteButton.setVisible(userRole == Role.ADMINISTRATOR);
+        decommissionButton.setVisible(userRole.compareTo(Role.INVENTORY_OFFICER) >= 0);
+        editButton.setVisible(userRole.compareTo(Role.INVENTORY_OFFICER) >= 0);
+        moveButton.setVisible(userRole.compareTo(Role.INVENTORY_OFFICER) >= 0);
+        addButton.setVisible(userRole.compareTo(Role.INVENTORY_OFFICER) >= 0);
     }
 
     @FXML

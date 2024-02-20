@@ -3,7 +3,6 @@ package com.course.client.controllers.inventory;
 import com.course.client.domain.InventoryObjectsList;
 import com.course.client.ui.NotificationDialog;
 import com.course.client.ui.SceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
